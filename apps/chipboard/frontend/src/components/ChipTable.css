@@ -1,0 +1,547 @@
+:root {
+  --bmw-blue: #0066B1;
+  --mini-green: #70B62C;
+  --white: #ffffff;
+  --black: #000000;
+  --chip-background: #ffffff;
+  --chip-text: #000000;
+  --hover-info-background: rgba(255, 255, 255, 0.95);
+  --hover-info-text: #000000;
+}
+
+.night-mode {
+  --chip-background: #2a2a2a;
+  --chip-text: #e0e0e0;
+  --hover-info-background: rgba(42, 42, 42, 0.95);
+  --hover-info-text: #e0e0e0;
+}
+
+/* Reset all container heights */
+html, body, #root {
+  min-height: 100vh;
+  height: auto;
+  overflow: auto;
+}
+
+/* Main container */
+.chip-table-container {
+  position: relative;
+  padding: 20px;
+  padding-bottom: 80px;
+  min-height: 100vh;
+  height: auto;
+  overflow: visible;
+}
+
+/* Table wrapper */
+.chip-table {
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 60px;
+  min-height: 100vh;
+  height: auto;
+  border-collapse: collapse;
+}
+
+/* Force content to be visible */
+.advisor-section:last-child {
+  padding-bottom: 40px; /* Reduced padding to ensure visibility */
+}
+
+/* Remove any height constraints */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 5px 0;
+}
+
+/* Keep header visible but not fixed */
+.team-goal {
+  margin-bottom: 20px;
+  background: var(--surface-color);
+  z-index: 1;
+  position: relative;
+  width: 90%;
+  margin: 0 auto 20px auto;
+}
+
+/* Progress bar styles */
+.advisor-name .progress-bar {
+  width: 200px !important;
+  height: 4px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.advisor-name .progress {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  transition: width 0.3s ease;
+}
+
+.advisor-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--light-gray);
+  padding: 8px 16px;
+  margin: 0 0 8px 0;
+  width: 100%;
+}
+
+.advisor-name h3 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.advisor-name-with-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.advisor-name-with-badges span {
+  margin-right: 4px;
+}
+
+/* Remove any overflow settings from parent containers */
+.advisor-section {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  padding-bottom: 15px;
+}
+
+.advisor-section:hover {
+  box-shadow: none;
+}
+
+.advisor-section h3 {
+  color: var(--text-color);
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  padding: 0 4px;
+}
+
+.advisor-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+}
+
+.advisor-stats .stats-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.advisor-stats .training-badges {
+  margin-left: auto;
+}
+
+.advisor-stats .delivered {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.advisor-stats .pending {
+  font-size: 0.9em;
+  opacity: 0.5;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  padding: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  font-size: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  z-index: 1;
+}
+
+.chip.delivered {
+  transform: rotate(0deg);
+}
+
+.chip.pending {
+  transform: rotate(10deg);
+}
+
+.chip:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+}
+
+.chip.pending:hover {
+  transform: rotate(10deg) translateY(-3px);
+}
+
+.chip:hover .hover-content {
+  min-height: fit-content;
+  height: auto;
+  padding: 8px;
+  white-space: normal;
+  z-index: 1000;
+}
+
+.chip.new-bmw {
+  background-color: var(--white);
+  color: var(--black);
+  border: 1px solid var(--bmw-blue);
+}
+
+.chip.new-mini {
+  background-color: var(--mini-green);
+  color: var(--white);
+}
+
+.chip.used-cpo {
+  background-color: var(--bmw-blue);
+  color: var(--white);
+}
+
+.chip.default {
+  background-color: var(--white);
+  color: var(--black);
+  border: 1px solid var(--black);
+}
+
+.night-mode .chip.new-bmw,
+.night-mode .chip.default {
+  background-color: var(--chip-background);
+  color: var(--chip-text);
+  border-color: var(--chip-text);
+}
+
+.hover-info {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--hover-info-background);
+  color: var(--hover-info-text);
+  padding: 10px;
+  width: 200px;
+  min-height: fit-content;
+  height: auto;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  overflow: visible;
+}
+
+.hover-info p {
+  margin: 5px 0;
+  font-size: 12px;
+}
+
+.chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: -5px;
+}
+
+.totals-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: var(--surface-alt-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.totals-left, .totals-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.total-item {
+  padding: 5px 10px;
+  background-color: var(--surface-color);
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sale-type-label {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.chip.non-editable {
+  opacity: 0.8;
+}
+
+.chip.non-editable:hover {
+  transform: none;
+}
+
+.edit-restriction {
+  color: #666;
+  font-style: italic;
+  font-size: 0.8em;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 1800px) {
+  .chips {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+
+@media (max-width: 1400px) {
+  .chip-table {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1100px) {
+  .chips {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .chip-table {
+    width: 98%;
+    padding-bottom: 80px;
+  }
+  
+  .chips {
+    display: block;
+    gap: 0;
+  }
+  
+  .chip-component {
+    width: 100%;
+    margin-bottom: 6px;
+    border-radius: 4px;
+    height: auto;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    transform: rotate(0deg) !important;
+    opacity: 1 !important;
+  }
+  
+  .chip-component.pending {
+    border-left: 4px solid #FFA500;
+  }
+  
+  .chip-component.delivered {
+    border-left: 4px solid #28a745;
+  }
+  
+  .stock-number {
+    font-size: 14px;
+  }
+  
+  /* Add visible info directly in the chip instead of tooltips */
+  .chip-component::after {
+    content: attr(data-vehicle-info);
+    font-size: 12px;
+    display: block;
+    margin-left: auto;
+    max-width: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .advisor-name {
+    padding: 12px;
+  }
+  
+  .advisor-stats {
+    margin-left: 12px;
+  }
+
+  .tooltip {
+    display: none !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .advisor-name h3 {
+    font-size: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .advisor-stats {
+    margin-left: 0;
+    margin-top: 4px;
+  }
+  
+  .totals-container {
+    flex-direction: column;
+  }
+  
+  .totals-left, .totals-right {
+    width: 100%;
+  }
+}
+
+/* Night mode adjustments */
+.night-mode .advisor-section {
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.night-mode .advisor-section:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.night-mode .advisor-name {
+  background: rgba(255, 255, 255, 0.03);
+  color: #4d8fe8;
+}
+
+.night-mode .advisor-name h3 {
+  color: #4d8fe8;
+}
+
+.app-container {
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow: auto;
+  padding-bottom: 40px;
+}
+
+.advisor-section:last-child {
+  margin-bottom: 60px;
+}
+
+.monthly-goal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 12px;
+}
+
+.goal-progress-bar {
+  width: 100px;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--bmw-blue);
+  transition: width 0.3s ease;
+}
+
+.goal-number, .goal-progress {
+  font-size: 0.8em;
+  color: var(--text-color);
+}
+
+/* Mobile Legend Styles */
+.mobile-info {
+  margin: 20px auto;
+  padding: 10px 15px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.night-mode .mobile-info {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+}
+
+.legend-color.delivered {
+  background-color: #28a745;
+}
+
+.legend-color.pending {
+  background-color: #FFA500;
+}
+
+/* Additional Mobile Optimizations */
+@media (max-width: 768px) {
+  .chip-table.mobile-view {
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .advisor-section {
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  
+  .night-mode .advisor-section {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+  
+  .advisor-name {
+    background-color: transparent;
+    padding: 10px 0;
+  }
+  
+  .monthly-goal {
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .advisor-stats {
+    flex-wrap: wrap;
+  }
+  
+  .totals-container {
+    padding: 8px;
+  }
+  
+  .total-item {
+    margin: 4px 0;
+  }
+}

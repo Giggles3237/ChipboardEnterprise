@@ -1,0 +1,49 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+/node_modules
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+/coverage
+
+# Uploads and generated files
+uploads/
+/uploads
+logs/
+*.log
+
+# Production builds
+build/
+/build
+frontend/build/
+
+# Local databases and dumps
+*.db
+*.sqlite
+*.sqlite3
+*.sql
+
+# Python / virtual environments
+.venv/
+venv/
+__pycache__/
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Certificates
+certs/
+# Local Netlify folder
+.netlify

@@ -1,0 +1,25 @@
+/* Tooltip.css */
+.tooltip {
+  position: absolute;
+  background-color: var(--hover-info-background, rgba(255, 255, 255, 0.95));
+  padding: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: var(--hover-info-text, black);
+  min-width: 200px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  white-space: normal;
+  z-index: 1000;
+  border-radius: 4px;
+}
+
+.tooltip.visible {
+  opacity: 1;
+}
+
+.night-mode .tooltip {
+  background-color: rgba(42, 42, 42, 0.95);
+  color: #e0e0e0;
+  border: 1px solid #555;
+}

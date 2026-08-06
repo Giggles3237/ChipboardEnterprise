@@ -1,0 +1,43 @@
+{
+  "name": "@chipboard/chipboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "engines": {
+    "node": "18.x",
+    "npm": "9.x"
+  },
+  "scripts": {
+    "dev": "node server.js",
+    "build": "npm --prefix frontend install && npm --prefix frontend run build && node -e \"const fs=require('fs');fs.rmSync('build',{recursive:true,force:true});fs.cpSync('frontend/build','build',{recursive:true});\"",
+    "test": "node --test tests/*.test.js",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/identity": "^4.10.2",
+    "axios": "^1.11.0",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.0.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "express-jwt": "^8.5.1",
+    "jsonwebtoken": "^9.0.2",
+    "lodash.debounce": "^4.0.8",
+    "mongoose": "^8.4.4",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.3",
+    "nodemailer": "^7.0.5",
+    "react-datepicker": "^7.2.0",
+    "sqlite3": "^5.1.7",
+    "xlsx": "^0.18.5"
+  },
+  "overrides": {
+    "gopd": "1.0.1",
+    "get-intrinsic": "1.2.4",
+    "side-channel": "1.0.4"
+  }
+}

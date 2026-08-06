@@ -1,0 +1,169 @@
+/* Styles for the Inbound component */
+
+/* Root variables for light mode */
+:root {
+  --background-color: #ffffff;    /* Background color of the container */
+  --text-color: #333333;          /* Primary text color */
+  --border-color: #ccc;           /* Border color for grid and cells */
+  --header-background: #f0f0f0;   /* Background color for headers */
+  --cell-background: #f0f0f0;     /* Background color for individual cells */
+  --hover-background: #e0e0e0;    /* Background color on hover */
+}
+
+/* Variables override for night mode */
+.night-mode {
+  --background-color: #121212;    /* Dark background color */
+  --text-color: #e0e0e0;          /* Light text color for dark mode */
+  --border-color: #555555;        /* Darker border color */
+  --header-background: #2a2a2a;   /* Dark header background */
+  --cell-background: #1e1e1e;     /* Dark cell background */
+  --hover-background: #2a3f50;    /* Enhanced hover background for dark mode */
+}
+
+/* Container styling */
+.inbound-container {
+  padding: 0 20px 20px;
+  overflow-x: auto;
+}
+
+/* Grid layout for organizing sales */
+.inbound-grid {
+  display: grid;
+  grid-template-columns: 200px repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+/* Ensures that header and advisor rows adopt grid's layout */
+.header-row, .advisor-row {
+  display: contents; /* Allows child elements to span grid areas */
+}
+
+/* Styling for headers and advisor names */
+.consultant-header, .month-header, .advisor-name, .month-cell {
+  background-color: var(--header-background);
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+/* Specific styling for consultant and month headers */
+.consultant-header, .month-header {
+  font-weight: bold;                          /* Bold text for emphasis */
+  justify-content: center;                    /* Center content horizontally */
+}
+
+/* Styling for advisor names */
+.advisor-name {
+  font-weight: bold;                          /* Bold text */
+  white-space: nowrap;                        /* Prevent text from wrapping */
+  overflow: hidden;                           /* Hide overflow text */
+  text-overflow: ellipsis;                    /* Show ellipsis for overflow */
+  min-height: 28px;
+}
+
+/* Styling for each month cell */
+.month-cell {
+  flex-wrap: wrap;                            /* Allow items to wrap within the cell */
+  gap: 5px;                                   /* Gap between items */
+  align-content: flex-start;                  /* Align items to the start */
+  min-height: 40px;                           /* Minimum height for the cell */
+  background-color: var(--cell-background);   /* Dynamic background color */
+}
+
+/* Styling for h1 elements if present */
+.h1 {
+  color: var(--text-color);                   /* Dynamic text color */
+  margin-bottom: 20px;                        /* Space below the element */
+}
+
+/* Tooltip styling for hover information */
+.hover-info {
+  position: absolute;                          /* Position relative to the nearest positioned ancestor */
+  background-color: var(--background-color);   /* Dynamic background color */
+  border: 1px solid var(--border-color);       /* Border styling */
+  padding: 10px;                               /* Inner padding */
+  z-index: 9999;                               /* Ensure tooltip appears above other elements */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);       /* Subtle shadow for depth */
+  top: 100%;                                   /* Position below the triggering element */
+  left: 50%;                                   /* Center horizontally */
+  transform: translateX(-50%);                 /* Adjust position to center */
+  width: max-content;                           /* Width based on content */
+  min-width: 200px;                             /* Minimum width */
+  white-space: nowrap;                          /* Prevent text wrapping */
+  font-size: 1.1em;                             /* Slightly larger font size */
+}
+
+.advisor-column, .month-column {
+  padding: 10px;
+  font-weight: bold;
+  background-color: var(--light-gray);
+}
+
+.advisor-row {
+  display: contents;
+}
+
+.advisor-name {
+  padding: 10px;
+  font-weight: bold;
+}
+
+.month-cell {
+  padding: 10px;
+  min-height: 50px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.view-options-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.view-options {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.view-option {
+  padding: 0.25rem 0.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--surface-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.view-option.active {
+  background-color: var(--bmw-blue);
+  color: white;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.action-button {
+  padding: 0.5rem 1rem;
+  background-color: var(--bmw-blue);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #043e87;
+  color: white;
+}

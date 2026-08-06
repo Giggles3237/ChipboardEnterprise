@@ -1,0 +1,129 @@
+.view-toggle-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: var(--light-gray);
+  border-radius: 4px;
+  margin: 0.5rem auto;
+  width: 95%;
+  max-width: 1600px;
+}
+
+.left-buttons, .right-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.view-button {
+  padding: 0.5rem 1rem;
+  background-color: var(--surface-color);
+  color: var(--text-color, #333);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.view-button.active {
+  background-color: var(--bmw-blue);
+  color: white;
+}
+
+.view-button:hover {
+  background-color: var(--hover-bg, var(--hover-background));
+}
+
+.view-button.active:hover {
+  background-color: #0055a5;
+  color: white;
+}
+
+/* Mobile Menu Styles */
+.mobile-menu-toggle {
+  display: none;
+  background-color: var(--bmw-blue);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .view-toggle-bar {
+    width: 100%;
+    margin: 0 0 0.5rem 0;
+    padding: 0.5rem;
+    position: relative;
+    flex-wrap: wrap;
+  }
+  
+  .left-buttons {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  
+  .view-button {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+    flex: 1 0 auto;
+    min-width: calc(33% - 0.25rem);
+  }
+  
+  .right-buttons {
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+  
+  .right-buttons .view-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .view-toggle-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .left-buttons, .right-buttons {
+    width: 100%;
+  }
+  
+  .left-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.25rem;
+  }
+  
+  .view-button {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+  }
+  
+  .mobile-menu-toggle {
+    display: flex;
+    margin-bottom: 0.5rem;
+  }
+  
+  .mobile-menu-collapsed .left-buttons {
+    display: none;
+  }
+  
+  .mobile-menu-expanded .left-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+} 

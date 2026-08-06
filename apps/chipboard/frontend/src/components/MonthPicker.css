@@ -1,0 +1,45 @@
+.month-picker {
+    margin-bottom: 20px;
+  }
+  
+  .month-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .month-buttons button {
+    padding: 8px 12px;
+    background-color: var(--surface-alt-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .month-buttons button:hover {
+    background-color: var(--hover-bg, var(--hover-background));
+  }
+  
+  .month-buttons button.selected {
+    background-color: #0653B6;
+    color: white;
+    border-color: #0653B6;
+  }
+  
+  .apply-button {
+    padding: 10px 20px;
+    background-color: #0653B6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .apply-button:hover {
+    background-color: #043584;
+  }

@@ -1,0 +1,14 @@
+.progress-container {
+  width: 50%;  /* Changed from 200px to 50% */
+  margin: 8px 0;
+  position: relative;
+}
+
+.progress-bar {
+  width: 100%;    /* Takes full width of container */
+  height: 24px;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+} 

@@ -1,0 +1,19 @@
+{
+  "name": "@chipboard/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./enterprise": "./src/enterprise.ts",
+    "./events": "./src/events.ts",
+    "./permissions": "./src/permissions.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "typescript": "5.9.2"
+  }
+}

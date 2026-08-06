@@ -1,0 +1,162 @@
+/* TV Dashboard — designed for wall-mounted displays */
+
+.tv-dashboard {
+  min-height: 100vh;
+  background: #0d0d0d;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  padding: 20px 36px 16px;
+  box-sizing: border-box;
+}
+
+/* ── Loading ── */
+.tv-loading {
+  min-height: 100vh;
+  background: #0d0d0d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tv-loading-text {
+  font-size: 2rem;
+  color: #888;
+  letter-spacing: 0.15em;
+}
+
+/* ── Header ── */
+.tv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #1e1e1e;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.tv-header-left {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.tv-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: #ffffff;
+}
+
+.tv-month {
+  font-size: 0.9rem;
+  color: #555;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.tv-header-center {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.tv-team-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+}
+
+.tv-team-number {
+  font-size: 2.4rem;
+  font-weight: 800;
+}
+
+.tv-team-number.delivered-color { color: #0066B1; }
+.tv-team-number.pending-color   { color: #ffa726; }
+.tv-team-number.goal-color      { color: #ef5350; }
+
+.tv-team-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: #444;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.tv-team-divider {
+  width: 1px;
+  height: 40px;
+  background: #222;
+}
+
+.tv-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.2;
+}
+
+.tv-clock {
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #bbb;
+  letter-spacing: 0.05em;
+}
+
+.tv-updated {
+  font-size: 0.65rem;
+  color: #3a3a3a;
+  letter-spacing: 0.08em;
+}
+
+/* ── Screen area ── */
+.tv-screen-area {
+  height: 68vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.tv-fade-in {
+  animation: tvFadeIn 0.5s ease forwards;
+}
+
+.tv-fade-out {
+  animation: tvFadeOut 0.5s ease forwards;
+}
+
+@keyframes tvFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tvFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* ── Dot indicators ── */
+.tv-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding-top: 12px;
+  flex-shrink: 0;
+}
+
+.tv-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2a2a2a;
+  transition: background 0.3s;
+  cursor: default;
+}
+
+.tv-dot-active {
+  background: #555;
+}

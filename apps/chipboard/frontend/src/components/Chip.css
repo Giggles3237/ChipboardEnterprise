@@ -1,0 +1,230 @@
+/* Base Chip Styles */
+.chip-component {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  padding: 1px 2px;
+  position: relative;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: 500;
+  border: none;
+  border-radius: 0;
+  user-select: none;
+  transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+  width: calc(10% - 15px);
+  box-sizing: border-box;
+}
+
+/* Hover animation - makes chips flow/float */
+.chip-component:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+/* Maintain rotation for pending chips on hover */
+.chip-component.pending:hover {
+  transform: translateY(-4px) scale(1.05) rotate(10deg);
+}
+
+/* Chip Types with specific colors */
+.chip-component.new-bmw {
+  background-color: var(--surface-color, white);
+  color: var(--bmw-blue);
+  border: 1px solid var(--bmw-blue);
+}
+
+.chip-component.new-mini {
+  background-color: var(--mini-green);
+  color: white;
+}
+
+.chip-component.used-cpo {
+  background-color: var(--bmw-blue);
+  color: white;
+}
+
+.chip-component.default {
+  background-color: var(--bmw-blue);
+  color: white;
+}
+
+.chip-component.wholesale {
+  background-color: #ffc107;
+  color: #5d4037;
+  border: 1px solid #e0a800;
+}
+
+/* Night mode adjustments */
+.night-mode .chip-component.new-bmw,
+.night-mode .chip-component.default {
+  background-color: var(--chip-background);
+  color: var(--chip-text);
+  border-color: var(--chip-text);
+}
+
+/* Delivery Status */
+.chip-component.delivered {
+  transform: rotate(0deg);
+  opacity: 1;
+}
+
+.chip-component.pending {
+  transform: rotate(10deg);
+  opacity: 0.7;
+}
+
+/* Stock Number */
+.stock-number {
+  font-size: 12.5px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+/* Hover Information */
+.hover-info {
+  position: absolute;
+  background-color: var(--hover-info-background, rgba(255, 255, 255, 0.9));
+  padding: 8px;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  color: var(--hover-info-text, black);
+  min-width: 200px;
+  pointer-events: none;
+}
+
+/* Gold Star for CPO */
+.gold-star {
+  color: gold;
+  margin-left: 5px;
+}
+
+/* Night Mode Adjustments */
+.night-mode .chip-component {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.night-mode .hover-info {
+  background-color: rgba(42, 42, 42, 0.95);
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+
+/* Maintain colors in night mode */
+.night-mode .chip-component.new-bmw {
+  background-color: var(--surface-color);
+  color: var(--chip-text);
+  border-color: var(--bmw-blue);
+}
+
+.night-mode .chip-component.new-mini {
+  background-color: var(--mini-green);
+  color: white;
+}
+
+.night-mode .chip-component.used-cpo,
+.night-mode .chip-component.default {
+  background-color: var(--bmw-blue);
+  color: white;
+}
+
+.tooltip {
+  position: fixed;
+  background-color: var(--hover-info-background, rgba(255, 255, 255, 0.95));
+  padding: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: var(--hover-info-text, black);
+  min-width: 200px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: normal;
+  z-index: 1000;
+}
+
+.tooltip.visible {
+  opacity: 1;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .chip-component {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: auto;
+    min-height: 32px;
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  
+  .chip-component:hover {
+    transform: none !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  .chip-component::after {
+    content: attr(data-vehicle-info);
+    margin-left: 12px;
+    font-size: 11px;
+    color: inherit;
+    opacity: 0.85;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60%;
+  }
+  
+  .chip-component.delivered {
+    border-left: 3px solid #28a745;
+  }
+  
+  .chip-component.pending {
+    border-left: 3px solid #FFA500;
+  }
+  
+  .chip-component:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .night-mode .chip-component:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .chip-component.new-bmw,
+  .chip-component.new-mini,
+  .chip-component.used-cpo,
+  .chip-component.default {
+    border-radius: 4px;
+  }
+  
+  .tooltip {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .chip-component::after {
+    max-width: 50%;
+  }
+  
+  .stock-number {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80px;
+  }
+}

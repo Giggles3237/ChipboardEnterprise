@@ -1,0 +1,86 @@
+.error-boundary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: var(--background-color);
+}
+
+.error-content {
+  max-width: 600px;
+  padding: 30px;
+  background: var(--surface-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 10px var(--shadow-color, rgba(0, 0, 0, 0.1));
+  text-align: center;
+}
+
+.error-content h1 {
+  color: #dc3545;
+  margin-bottom: 20px;
+}
+
+.error-content p {
+  color: var(--muted-text-color);
+  margin-bottom: 20px;
+}
+
+.error-details {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.error-details summary {
+  cursor: pointer;
+  color: var(--muted-text-color);
+  margin-bottom: 10px;
+}
+
+.error-details pre {
+  background: var(--surface-alt-color);
+  padding: 15px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.reload-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.reload-button:hover {
+  background: #0056b3;
+}
+
+.night-mode .error-boundary {
+  background-color: #121212;
+}
+
+.night-mode .error-content {
+  background: #1e1e1e;
+}
+
+.night-mode .error-content h1 {
+  color: #ff6b6b;
+}
+
+.night-mode .error-content p,
+.night-mode .error-details summary {
+  color: #e0e0e0;
+}
+
+.night-mode .error-details pre {
+  background: #2a2a2a;
+  color: #e0e0e0;
+} 

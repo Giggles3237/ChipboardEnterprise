@@ -1,0 +1,336 @@
+:root {
+  --bmw-blue: #0066B1;
+  --mini-green: #70B62C;
+  --white: #ffffff;
+  --light-gray: #f2f2f2;
+  --dark-gray: #333333;
+  --border-color: #cccccc;
+  --background-color: #ffffff;
+  --text-color: #333333;
+}
+
+.night-mode {
+  --white: #ffffff;
+  --light-gray: #2a2a2a;
+  --dark-gray: #e0e0e0;
+  --border-color: #555555;
+  --background-color: #121212;
+  --text-color: #e0e0e0;
+}
+
+.sales-table-container {
+  margin: 12px auto;
+  background: var(--surface-color);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 4px var(--shadow-color, rgba(0, 0, 0, 0.1));
+  overflow: hidden;
+  width: 95%;
+  max-width: 1600px;
+}
+
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.sales-table th {
+  background-color: var(--light-gray);
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sales-table td {
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.sales-table tbody tr:hover {
+  background-color: var(--light-gray);
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status-badge.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.night-mode .status-badge.pending {
+  background-color: #3a2f12;
+  color: #f8dda1;
+}
+
+.status-badge.completed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.night-mode .status-badge.completed {
+  background-color: #12331f;
+  color: #9ee6b8;
+}
+
+.status-badge.cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.night-mode .status-badge.cancelled {
+  background-color: #3a171b;
+  color: #f0a3ad;
+}
+
+.edit-button {
+  padding: 4px 8px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 12px;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 20px;
+  list-style: none;
+}
+
+.pagination-item {
+  display: inline-block;
+}
+
+.pagination-link {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-color);
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  background: var(--surface-color);
+  transition: all 0.2s ease;
+}
+
+.pagination-link:hover {
+  background-color: var(--light-gray);
+  border-color: var(--bmw-blue);
+}
+
+.pagination .active .pagination-link {
+  background-color: var(--bmw-blue);
+  color: white;
+  border-color: var(--bmw-blue);
+}
+
+.pagination-link:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 102, 177, 0.2);
+}
+
+.pagination .disabled .pagination-link {
+  color: var(--border-color);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Optional: Add responsive styles */
+@media (max-width: 768px) {
+  .pagination {
+    gap: 2px;
+  }
+
+  .pagination-link {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+
+  /* Hide page numbers on mobile, show only prev/next and immediate siblings */
+  .pagination-item:not(.previous):not(.next):not(.active):not(.break) {
+    display: none;
+  }
+}
+
+/* Column-specific widths */
+.sales-table .column-stockNumber { width: 8%; }
+.sales-table .column-clientName { width: 12%; }
+.sales-table .column-year { width: 5%; }
+.sales-table .column-make { width: 8%; }
+.sales-table .column-model { width: 10%; }
+.sales-table .column-color { width: 8%; }
+.sales-table .column-advisor { width: 10%; }
+.sales-table .column-delivered { width: 7%; }
+.sales-table .column-deliveryDate { width: 10%; }
+.sales-table .column-type { width: 8%; }
+.sales-table .column-actions { width: 14%; }
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .sales-table th,
+  .sales-table td {
+    font-size: 0.9em;
+  }
+  
+  .sales-table .th-content input {
+    font-size: 0.75em;
+  }
+}
+
+@media (max-width: 992px) {
+  .sales-table th,
+  .sales-table td {
+    font-size: 0.8em;
+  }
+  
+  .sales-table .th-content input {
+    font-size: 0.7em;
+  }
+}
+
+.sales-table .th-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sales-table .th-content input {
+  width: 100%;
+  padding: 4px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 11px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+}
+
+.clickable-row {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.clickable-row:hover {
+  background-color: var(--light-gray);
+}
+
+.wholesale-row {
+  background-color: #fff8e1;
+  color: #795548;
+}
+
+.night-mode .wholesale-row {
+  background-color: #3a2f12;
+  color: #f8dda1;
+}
+
+.wholesale-row:hover {
+  background-color: #ffecb3 !important;
+}
+
+.night-mode .wholesale-row:hover {
+  background-color: #4a3c18 !important;
+}
+
+.sales-table td.hidden-client {
+  color: var(--text-color);
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.actions-cell {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.delete-button {
+  width: 0.4in;
+  padding: 2px 0;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 10px;
+  margin-left: 2px;
+  opacity: 0.8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+  opacity: 1;
+}
+
+.filtered-results {
+  padding: 10px;
+  color: var(--text-color);
+  font-size: 0.9em;
+  text-align: right;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  position: relative;
+}
+
+.export-button {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 14px;
+  cursor: pointer;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+  padding: 4px;
+  border-radius: 3px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.export-button:hover {
+  opacity: 0.7;
+  background-color: var(--light-gray);
+}
+
+/* Hide on mobile */
+@media (max-width: 768px) {
+  .export-button {
+    display: none;
+  }
+}

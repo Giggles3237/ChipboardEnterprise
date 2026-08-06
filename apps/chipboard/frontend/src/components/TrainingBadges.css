@@ -1,0 +1,40 @@
+.training-badges {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.training-badges.small .training-badge {
+  width: 60px;
+  height: 60px;
+}
+
+.training-badges.medium .training-badge {
+  width: 80px;
+  height: 80px;
+}
+
+.training-badges.large .training-badge {
+  width: 100px;
+  height: 100px;
+}
+
+.training-badge {
+  object-fit: contain;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.training-badge.ethos {
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.training-badge.bmw {
+  border-radius: 0;
+  background-color: transparent;
+  background: none;
+} 

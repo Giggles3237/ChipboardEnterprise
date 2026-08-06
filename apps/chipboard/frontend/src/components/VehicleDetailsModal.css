@@ -1,0 +1,240 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--overlay-color, rgba(0, 0, 0, 0.5));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.modal-content {
+  background: var(--surface-color) !important;
+  color: var(--text-color);
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 10px var(--shadow-color, rgba(0, 0, 0, 0.2));
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.modal-title {
+  color: var(--bmw-blue);
+  margin: 0;
+  text-align: center;
+}
+
+.close-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-color);
+  padding: 0.5rem;
+}
+
+.close-button:hover {
+  color: var(--bmw-blue);
+}
+
+.vehicle-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.detail-group {
+  margin-bottom: 1rem;
+}
+
+.detail-label {
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 0.25rem;
+}
+
+.detail-value {
+  color: var(--text-color);
+  padding: 8px;
+  background-color: var(--light-gray);
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+/* Night mode styles */
+.night-mode .modal-content {
+  background: var(--surface-color) !important;
+}
+
+.night-mode .modal-header {
+  border-bottom-color: #333;
+}
+
+.night-mode .modal-header h3 {
+  color: #fff;
+}
+
+.night-mode .section-header {
+  color: #fff;
+  border-bottom-color: #333;
+}
+
+.night-mode .detail-row {
+  background-color: #2d2d2d;
+  border-color: #333;
+}
+
+.night-mode .detail-label {
+  color: #ccc;
+}
+
+.night-mode .detail-value {
+  color: #fff;
+}
+
+.night-mode .close-button {
+  color: #ccc;
+}
+
+.night-mode .close-button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.key-status-section {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: var(--light-gray);
+  border-radius: 8px;
+}
+
+.key-status-section h3 {
+  margin-bottom: 15px;
+  color: var(--text-color);
+}
+
+.key-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.key-card {
+  padding: 15px;
+  border-radius: 6px;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+}
+
+.key-card h4 {
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+.key-card.in {
+  border-left: 4px solid #4CAF50;
+}
+
+.key-card.out {
+  border-left: 4px solid #FFC107;
+}
+
+.key-card.overdue {
+  border-left: 4px solid #f44336;
+}
+
+.key-details {
+  display: grid;
+  gap: 8px;
+}
+
+.key-details div {
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
+
+/* Night mode styles */
+.night-mode .key-card {
+  background-color: var(--surface-alt-color);
+}
+
+.recon-link {
+  color: var(--bmw-blue);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.recon-link:hover {
+  color: var(--bmw-dark-blue);
+  text-decoration: underline;
+}
+
+.night-mode .recon-link {
+  color: #4E8DCD;
+}
+
+.night-mode .recon-link:hover {
+  color: #6EA1D4;
+}
+
+.vehicle-link {
+  color: var(--bmw-blue);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.vehicle-link:hover {
+  color: var(--bmw-dark-blue);
+  text-decoration: underline;
+}
+
+.night-mode .vehicle-link {
+  color: #4E8DCD;
+}
+
+.night-mode .vehicle-link:hover {
+  color: #6EA1D4;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Override close-button style when in the footer */
+.footer-close-button {
+  position: static; /* Remove absolute positioning */
+  font-size: 16px;  /* Adjust font-size if desired */
+  padding: 10px 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--light-gray);
+  cursor: pointer;
+}
+
+/* Optional: Hover effect for the footer close button */
+.footer-close-button:hover {
+  background-color: var(--bmw-blue);
+  color: white;
+} 

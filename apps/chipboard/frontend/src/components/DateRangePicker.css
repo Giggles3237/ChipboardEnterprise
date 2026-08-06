@@ -1,0 +1,126 @@
+.date-range-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+}
+
+.date-picker-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Hide labels but keep them for screen readers */
+.date-picker-wrapper label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.date-input {
+  padding: 4px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  width: 110px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Style for the "to" text */
+.date-range-separator {
+  margin: 0 4px;
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
+
+/* Keep existing datepicker styles */
+.react-datepicker {
+  font-family: inherit;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.react-datepicker__header {
+  background-color: var(--bmw-blue);
+  border-bottom: none;
+  padding: 12px;
+}
+
+.react-datepicker__current-month {
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.react-datepicker__day-name {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+}
+
+.react-datepicker__day {
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  border-radius: 50%;
+  margin: 2px;
+  font-size: 13px;
+}
+
+.react-datepicker__day--selected {
+  background-color: var(--bmw-blue);
+  color: white;
+}
+
+.react-datepicker__day:hover {
+  background-color: rgba(6, 83, 182, 0.1);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .search-date-container {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .date-range-picker {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .archive-toggle {
+    padding: 12px 0 0;
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.archive-toggle {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.archive-toggle label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.archive-toggle input[type="checkbox"] {
+  cursor: pointer;
+}

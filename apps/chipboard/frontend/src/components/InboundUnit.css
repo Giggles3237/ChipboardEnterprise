@@ -1,0 +1,114 @@
+/* Styles for the InboundUnit component */
+
+/* Root variables for light mode */
+:root {
+  --bmw-background: #d1e7ff;      /* Background color for BMW units */
+  --mini-background: #ffebd1;     /* Background color for MINI units */
+  --text-color: #333;             /* Text color */
+  --hover-background: rgba(255, 255, 255, 0.98); /* Background on hover */
+  --hover-border: #ccc;           /* Border color on hover */
+  --hover-text: #333;             /* Text color on hover */
+  --shadow-color: rgba(0, 0, 0, 0.2); /* Shadow color */
+}
+
+/* Variables override for night mode */
+.night-mode {
+  --bmw-background: #1a3c5a;      /* Dark background for BMW units */
+  --mini-background: #5a4a1a;     /* Dark background for MINI units */
+  --text-color: #e0e0e0;          /* Light text color */
+  --hover-background: rgba(42, 42, 42, 0.98); /* Darker hover background */
+  --hover-border: #555;           /* Darker border on hover */
+  --hover-text: #e0e0e0;          /* Light text on hover */
+  --shadow-color: rgba(0, 0, 0, 0.4); /* Darker shadow */
+}
+
+/* Base styling for inbound units */
+.inbound-unit {
+  display: inline-block;                             /* Inline block to allow setting width and height */
+  padding: 10px;                                     /* Inner spacing */
+  margin: 5px;                                       /* Outer spacing */
+  box-shadow: 0 2px 4px var(--shadow-color);         /* Subtle shadow for depth */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transitions on hover */
+  cursor: pointer;                                   /* Pointer cursor to indicate interactivity */
+  width: 80px;                                       /* Fixed width */
+  opacity: 0.9;                                      /* Slightly transparent */
+  position: relative;                                /* Position relative for tooltip positioning */
+  border-radius: 0;                                  /* No border radius */
+  border: none;                                      /* No border */
+  font-size: 0.8em;                                  /* Smaller font size */
+  text-align: center;                                /* Center text */
+  color: var(--text-color);                          /* Dynamic text color */
+}
+
+/* Specific styling for BMW units */
+.bmw-unit {
+  background-color: var(--bmw-background);          /* BMW background color */
+}
+
+/* Specific styling for MINI units */
+.mini-unit {
+  background-color: var(--mini-background);         /* MINI background color */
+}
+
+/* Hover effects for inbound units */
+.inbound-unit:hover {
+  opacity: 1;                                        /* Fully opaque on hover */
+  transform: translateY(-3px);                       /* Slight lift effect */
+}
+
+/* Styling for the client's name */
+.client-name {
+  font-weight: bold;                                 /* Bold text for emphasis */
+}
+
+/* Styling for the gold star indicating CPO */
+.gold-star {
+  color: gold;                                       /* Gold color for the star */
+  margin-left: 3px;                                  /* Spacing between name and star */
+}
+
+/* Tooltip information on hover */
+.hover-info {
+  position: absolute;                                /* Positioned relative to the inbound-unit */
+  background-color: var(--hover-background);         /* Dynamic background color */
+  border: 1px solid var(--hover-border);             /* Border styling */
+  padding: 15px;                                     /* Inner padding */
+  z-index: 9999;                                     /* Ensure tooltip appears above other elements */
+  box-shadow: 0 2px 5px var(--shadow-color);         /* Shadow for depth */
+  bottom: 120%;                                      /* Position above the inbound-unit */
+  left: 50%;                                         /* Center horizontally */
+  transform: translateX(-50%);                       /* Adjust position to center */
+  width: 250px;                                      /* Fixed width */
+  white-space: normal;                               /* Allow text wrapping */
+  font-size: 1.1em;                                  /* Slightly larger font */
+}
+
+/* Paragraph styling within the tooltip */
+.hover-info p {
+  margin: 8px 0;                                     /* Vertical spacing between paragraphs */
+  font-size: 1.1em;                                  /* Slightly larger font size */
+  color: var(--hover-text);                          /* Dynamic text color */
+  line-height: 1.4;                                  /* Increased line height for readability */
+  word-wrap: break-word;                             /* Allow words to break to prevent overflow */
+}
+
+/* Fixed tooltip styling for specific scenarios */
+.inbound-hover-info {
+  position: fixed;                                   /* Fixed position relative to viewport */
+  background-color: var(--hover-background);         /* Dynamic background color */
+  border: 1px solid var(--hover-border);             /* Border styling */
+  padding: 15px;                                     /* Inner padding */
+  z-index: 9999;                                     /* Ensure tooltip appears above other elements */
+  box-shadow: 0 2px 5px var(--shadow-color);         /* Shadow for depth */
+  width: 280px;                                      /* Fixed width */
+  white-space: normal;                               /* Allow text wrapping */
+}
+
+/* Paragraph styling within the fixed tooltip */
+.inbound-hover-info p {
+  margin: 8px 0;                                     /* Vertical spacing between paragraphs */
+  font-size: 1.1em;                                  /* Slightly larger font size */
+  color: var(--hover-text);                          /* Dynamic text color */
+  line-height: 1.4;                                  /* Increased line height for readability */
+  word-wrap: break-word;                             /* Allow words to break to prevent overflow */
+}

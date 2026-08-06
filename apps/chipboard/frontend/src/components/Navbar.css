@@ -1,0 +1,129 @@
+.navbar {
+  padding: 0.5rem 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-bottom: 2px solid var(--bmw-blue);
+  background-color: var(--background-color) !important;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: var(--bmw-blue) !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link {
+  color: var(--text-color) !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--bmw-blue) !important;
+}
+
+.navbar-text {
+  color: var(--text-color);
+  padding: 5px 10px;
+  background-color: var(--background-color);
+  border-radius: 4px;
+  margin-right: 15px;
+  transition: all 0.3s ease;
+}
+
+/* Dark mode specific styles */
+.night-mode .navbar {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  background-color: var(--background-color) !important;
+}
+
+.night-mode .navbar-toggler {
+  border-color: var(--text-color);
+}
+
+.night-mode .navbar-toggler-icon {
+  filter: invert(1);
+}
+
+.night-mode .navbar-collapse {
+  background-color: var(--background-color);
+}
+
+.night-mode .nav-link {
+  color: var(--text-color) !important;
+}
+
+.night-mode .nav-link:hover {
+  color: var(--bmw-blue) !important;
+}
+
+.night-mode .navbar-text {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 991px) {
+  .navbar-nav {
+    text-align: right;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem !important;
+  }
+
+  .navbar-text {
+    text-align: right;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    margin: 0;
+  }
+
+  .navbar-collapse {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .nav-item {
+    margin: 2px 0;
+  }
+
+  /* Dark mode mobile specific */
+  .night-mode .navbar-collapse {
+    border-top: 1px solid var(--border-color);
+  }
+}
+
+/* Logo styles */
+.navbar-logo {
+  height: 100px;
+  width: auto;
+  margin-right: 10px;
+  transition: filter 0.3s ease;
+}
+
+.night-mode .navbar-logo {
+  filter: brightness(0.8) invert(0.9) hue-rotate(180deg);
+}
+
+@media (max-width: 768px) {
+  .navbar-logo {
+    height: 75px;
+  }
+}
+
+#site-logo {
+  width: 200px;
+  height: auto;
+  transition: filter 0.3s ease;
+}
+
+.night-mode #site-logo {
+  filter: brightness(0.8) invert(0.9) hue-rotate(180deg);
+}
+
+@media (max-width: 768px) {
+  #site-logo {
+    width: 150px;
+  }
+}

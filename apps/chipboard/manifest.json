@@ -1,0 +1,37 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.11",
+    "version": "1.0.0",
+    "id": "8c4be7a1-8f4b-4a29-8794-44e62bdae73f",
+    "packageName": "app.netlify.bopchips",
+    "developer": {
+      "name": "BopChips Team",
+      "websiteUrl": "https://bopchips.netlify.app/",
+      "privacyUrl": "https://bopchips.netlify.app/privacy",
+      "termsOfUseUrl": "https://bopchips.netlify.app/terms"
+    },
+    "name": {
+      "short": "BopChips",
+      "full": "BopChips Sales Dashboard"
+    },
+    "description": {
+      "short": "Manage and track sales data",
+      "full": "BopChips Sales Dashboard is an internal tool designed to streamline the management and tracking of vehicle sales data. It provides a comprehensive view of sales activities, allowing users to efficiently organize, edit, and analyze sales information. With features like sales grouping by advisor, detailed sales records, and intuitive navigation, BopChips enhances productivity and decision-making for sales teams."
+    },
+    "icons": {
+      "outline": "outline.png",
+      "color": "logo192.png"
+    },
+    "accentColor": "#FFFFFF",
+    "staticTabs": [
+      {
+        "entityId": "chip-board",
+        "name": "Chip Board",
+        "contentUrl": "https://bopchips.netlify.app/",
+        "websiteUrl": "https://bopchips.netlify.app/",
+        "scopes": ["team"]
+      }
+    ],
+    "permissions": ["identity", "messageTeamMembers"],
+    "validDomains": ["bopchips.netlify.app"]
+  }

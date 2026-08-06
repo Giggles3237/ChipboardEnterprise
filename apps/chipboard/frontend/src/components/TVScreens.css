@@ -1,0 +1,269 @@
+/* Shared styles for all TV screen components */
+
+.tv-screen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tv-screen-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #444;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.tv-screen-chart {
+  flex: 1;
+  min-height: 0;
+  /* Explicit height needed for Recharts ResponsiveContainer */
+  height: calc(68vh - 40px);
+}
+
+/* Leaderboard */
+.tv-lb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  justify-content: center;
+}
+
+.tv-lb-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 14px 24px;
+}
+
+.tv-lb-rank {
+  font-size: 1.6rem;
+  font-weight: 900;
+  width: 44px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.tv-lb-rank.gold   { color: #ffd700; }
+.tv-lb-rank.silver { color: #c0c0c0; }
+.tv-lb-rank.bronze { color: #cd7f32; }
+.tv-lb-rank.other  { color: #444; }
+
+.tv-lb-name {
+  flex: 1;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e0e0e0;
+}
+
+.tv-lb-number {
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: #fff;
+  min-width: 60px;
+  text-align: right;
+}
+
+.tv-lb-goal {
+  font-size: 0.9rem;
+  color: #555;
+  min-width: 60px;
+  text-align: right;
+}
+
+.tv-lb-bar-track {
+  width: 160px;
+  height: 8px;
+  background: #2a2a2a;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.tv-lb-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.8s ease;
+}
+
+/* Pace Tracker */
+.tv-pace-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  flex: 1;
+  align-content: start;
+}
+
+.tv-pace-card {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 20px 24px;
+}
+
+.tv-pace-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ccc;
+  margin-bottom: 6px;
+}
+
+.tv-pace-stats {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.tv-pace-delivered {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+}
+
+.tv-pace-goal-text {
+  font-size: 1rem;
+  color: #555;
+}
+
+.tv-pace-needed {
+  font-size: 0.85rem;
+  margin-top: 6px;
+}
+
+.tv-pace-needed.on-track  { color: #00e676; }
+.tv-pace-needed.behind    { color: #ef5350; }
+.tv-pace-needed.hit       { color: #ffd700; }
+
+/* Pending Deliveries */
+.tv-pending-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.tv-pending-table th {
+  text-align: left;
+  padding: 8px 16px;
+  color: #555;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-bottom: 1px solid #222;
+}
+
+.tv-pending-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #1e1e1e;
+  color: #ccc;
+}
+
+.tv-pending-table tr:hover td {
+  background: #1a1a1a;
+}
+
+.tv-pending-overdue {
+  color: #ef5350 !important;
+  font-weight: 600;
+}
+
+/* Closest to Goal */
+.tv-ctg-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex: 1;
+  align-content: center;
+  justify-content: center;
+}
+
+.tv-ctg-card {
+  background: #1a1a1a;
+  border: 2px solid #ffd700;
+  border-radius: 14px;
+  padding: 28px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 200px;
+}
+
+.tv-ctg-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #e0e0e0;
+}
+
+.tv-ctg-number {
+  font-size: 4rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+}
+
+.tv-ctg-need {
+  font-size: 1rem;
+  color: #ffd700;
+  font-weight: 600;
+}
+
+.tv-ctg-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: #00e676;
+}
+
+/* Donut */
+.tv-donut-wrapper {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Wholesale */
+.tv-ws-total {
+  font-size: 6rem;
+  font-weight: 900;
+  color: #ffc107;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.tv-ws-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: #555;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.tv-ws-breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.tv-ws-pill {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tv-ws-pill-name  { font-size: 0.9rem; color: #888; }
+.tv-ws-pill-count { font-size: 2rem; font-weight: 900; color: #ffc107; }

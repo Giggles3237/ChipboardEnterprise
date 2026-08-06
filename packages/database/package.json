@@ -1,0 +1,30 @@
+{
+    "name":  "@chipboard/database",
+    "version":  "0.0.0",
+    "private":  true,
+    "type":  "module",
+    "exports":  {
+                    ".":  "./src/index.ts",
+                    "./schema":  "./src/schema.ts"
+                },
+    "scripts":  {
+                    "check-types":  "tsc --noEmit",
+                    "db:generate":  "drizzle-kit generate --config drizzle.config.ts",
+                    "db:migrate":  "drizzle-kit migrate --config drizzle.config.ts",
+                    "db:push":  "drizzle-kit push --config drizzle.config.ts",
+                    "db:check":  "node scripts/check-connection.mjs",
+                    "db:tables":  "node scripts/list-tables.mjs"
+                },
+    "dependencies":  {
+                         "@chipboard/shared":  "workspace:*",
+                         "dotenv":  "^16.4.5",
+                         "drizzle-orm":  "^0.45.2",
+                         "pg":  "^8.22.0"
+                     },
+    "devDependencies":  {
+                            "@repo/typescript-config":  "workspace:*",
+                            "@types/pg":  "^8.20.3",
+                            "drizzle-kit":  "^0.31.10",
+                            "typescript":  "5.9.2"
+                        }
+}

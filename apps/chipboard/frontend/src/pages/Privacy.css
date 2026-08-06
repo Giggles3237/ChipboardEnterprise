@@ -1,0 +1,16 @@
+.privacy-page {
+  padding: 20px;
+  background-color: var(--surface-color);
+  color: var(--text-color);
+}
+
+.privacy-page h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.privacy-page p {
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+

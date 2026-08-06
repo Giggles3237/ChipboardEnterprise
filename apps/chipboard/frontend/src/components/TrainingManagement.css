@@ -1,0 +1,270 @@
+.training-management {
+    padding: 20px;
+    max-width: 100%;
+    background: var(--background-color, #ffffff);
+}
+
+.training-management-header {
+    margin-bottom: 24px;
+}
+
+.training-management-header h1 {
+    margin: 0 0 8px 0;
+    color: var(--text-color, #212529);
+    font-size: 28px;
+}
+
+.training-management-subtitle {
+    color: var(--text-color-secondary, #6c757d);
+    font-size: 14px;
+    margin: 0;
+}
+
+.training-management-error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.training-management-success-message {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.training-management-filters {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    padding: 16px;
+    background: var(--background-secondary, #f8f9fa);
+    border-radius: 8px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.filter-group label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-color-secondary, #6c757d);
+}
+
+.filter-group select,
+.filter-group input {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color, #ced4da);
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: var(--input-bg, white);
+    color: var(--text-color, #212529);
+    min-width: 150px;
+}
+
+.filter-group input {
+    min-width: 200px;
+}
+
+.save-all-button {
+    padding: 8px 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: background-color 0.2s;
+    margin-left: auto;
+}
+
+.save-all-button:hover:not(:disabled) {
+    background-color: #218838;
+}
+
+.save-all-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.training-management-table-wrapper {
+    overflow-x: auto;
+    background: var(--surface-color, white);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.training-management-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1000px;
+}
+
+.training-management-table thead {
+    background-color: var(--header-bg, #f8f9fa);
+}
+
+.training-management-table th {
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-color, #495057);
+    border-bottom: 2px solid var(--border-color, #dee2e6);
+    font-size: 14px;
+}
+
+.training-column {
+    text-align: center;
+    width: 120px;
+}
+
+.training-column-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.training-management-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border-color, #e9ecef);
+    color: var(--text-color, #212529);
+    font-size: 14px;
+}
+
+.training-management-table tbody tr:hover {
+    background-color: var(--hover-bg, #f8f9fa);
+}
+
+.training-management-table tbody tr.has-unsaved-changes {
+    background-color: #fff3cd;
+}
+
+.night-mode .training-management-table tbody tr.has-unsaved-changes {
+    background-color: #3a2f12;
+}
+
+.training-checkbox-cell {
+    text-align: center;
+}
+
+.training-checkbox-cell input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #0653B6;
+}
+
+.training-checkbox-cell input[type="checkbox"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.status-badge.status-active {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-badge.status-inactive {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.save-user-button {
+    padding: 6px 12px;
+    background-color: #0653B6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.save-user-button:hover:not(:disabled) {
+    background-color: #043584;
+}
+
+.save-user-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.no-users-message {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.training-management-footer {
+    margin-top: 16px;
+    padding: 12px;
+    background: var(--background-secondary, #f8f9fa);
+    border-radius: 8px;
+    text-align: right;
+}
+
+.user-count {
+    color: var(--text-color-secondary, #6c757d);
+    font-size: 14px;
+}
+
+.training-management-loading,
+.training-management-error {
+    padding: 40px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.training-management-error {
+    color: #dc3545;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .training-management {
+        padding: 12px;
+    }
+
+    .training-management-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-group select,
+    .filter-group input {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .save-all-button {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .training-management-table-wrapper {
+        overflow-x: scroll;
+    }
+}
