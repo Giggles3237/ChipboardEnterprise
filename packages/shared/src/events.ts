@@ -1,7 +1,14 @@
-export const enterpriseEventTypes = [
+﻿export const enterpriseEventTypes = [
   "organization.created",
   "store.created",
   "user.invited",
+  "user.created",
+  "user.profile.updated",
+  "user.role.updated",
+  "user.status.updated",
+  "user.password.changed",
+  "user.password.reset",
+  "user.deactivated",
   "role.assigned",
   "sale.created",
   "sale.updated",
