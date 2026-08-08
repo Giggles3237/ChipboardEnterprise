@@ -1,216 +1,182 @@
-// routes/goals.js
-const express = require('express');
+﻿const express = require('express');
 const router = express.Router();
 const { authenticate } = require('../middleware/auth');
 const { oldPool } = require('../db');
+const { CompositeGoalsEventPublisher, MysqlGoalsAuditLogger, MysqlGoalsEventOutboxPublisher } = require('../services/goalsEvents');
+const { MysqlGoalsRepository, TEAM_ADVISOR } = require('../services/goalsRepository');
+const { GoalsService } = require('../services/goalsService');
 
-// 1. Team-specific routes first
-router.get('/team/test/:month', authenticate, async (req, res) => {
-    try {
-        const { month } = req.params;
-        const [results] = await oldPool.query(
-            'SELECT * FROM team_goals WHERE month = ?',
-            [month]
-        );
-        res.json({
-            rawResults: results,
-            parsedGoal: results.length ? {
-                goal_count: results[0].goal_count,
-                month: results[0].month,
-                updated_at: results[0].updated_at
-            } : null
-        });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+const goalsService = new GoalsService({
+  repository: new MysqlGoalsRepository(oldPool),
+  events: new CompositeGoalsEventPublisher([
+    new MysqlGoalsEventOutboxPublisher(oldPool)
+  ]),
+  audit: new MysqlGoalsAuditLogger(oldPool)
 });
 
-// Get team goal (sum of individual goals)
-router.get('/team-goal/:month', authenticate, async (req, res) => {
+const getTenantContext = (req, res) => {
+  const organizationId = req.auth?.organizationId;
+
+  if (!organizationId) {
+    res.status(403).json({ message: 'Organization access required' });
+    return null;
+  }
+
+  return {
+    organizationId,
+    actorUserId: req.auth.userId,
+    actorName: req.auth.name,
+    role: req.auth.role
+  };
+};
+
+const toLegacyGoal = (goal) => ({
+  advisor_name: goal.advisorName,
+  month: goal.month,
+  goal_count: goal.goalCount,
+  organization_id: goal.organizationId,
+  updated_at: goal.updatedAt
+});
+
+const handleGoalsError = (res, error, fallbackMessage) => {
+  if (error.statusCode) {
+    return res.status(error.statusCode).json({ message: error.message });
+  }
+
+  console.error(fallbackMessage, {
+    message: error.message,
+    code: error.code,
+    sqlMessage: error.sqlMessage,
+    sql: error.sql
+  });
+
+  return res.status(500).json({
+    message: fallbackMessage,
+    details: error.sqlMessage || error.message
+  });
+};
+
+router.get('/team/test/:month', authenticate, async (req, res) => {
   try {
-    console.log('Fetching team goal (sum) for month:', req.params.month);
-    
-    // Calculate team goal as sum of individual goals
-    const [individualResults] = await oldPool.query(
-      'SELECT goal_count FROM monthly_goals WHERE month = ? AND advisor_name != "TEAM"',
-      [req.params.month]
-    );
-    
-    console.log('Individual goals found:', individualResults);
-    
-    // Calculate team goal as sum of individual goals
-    const teamGoal = individualResults.reduce((sum, goal) => sum + (goal.goal_count || 0), 0);
-    
-    console.log('Calculated team goal:', teamGoal);
-    
-    res.json({ goal_count: teamGoal });
-    
+    const context = getTenantContext(req, res);
+    if (!context) return;
+
+    const goal = await goalsService.getStoredTeamGoal(context, req.params.month);
+    res.json({
+      rawResults: goal ? [toLegacyGoal(goal)] : [],
+      parsedGoal: goal ? {
+        goal_count: goal.goalCount,
+        month: goal.month,
+        updated_at: goal.updatedAt
+      } : null
+    });
   } catch (error) {
-    console.error('Error details:', {
-      message: error.message,
-      code: error.code,
-      sqlMessage: error.sqlMessage,
-      sql: error.sql
-    });
-    
-    res.status(500).json({ 
-      message: 'Error fetching team goal',
-      details: error.sqlMessage || error.message
-    });
+    handleGoalsError(res, error, 'Error fetching team goal test data');
   }
 });
 
-// Get team target (stored team goal)
+router.get('/team-goal/:month', authenticate, async (req, res) => {
+  try {
+    const context = getTenantContext(req, res);
+    if (!context) return;
+
+    const teamGoal = await goalsService.getCalculatedTeamGoal(context, req.params.month);
+    res.json({ goal_count: teamGoal });
+  } catch (error) {
+    handleGoalsError(res, error, 'Error fetching team goal');
+  }
+});
+
 router.get('/team/:month', authenticate, async (req, res) => {
   try {
-    console.log('Fetching team target for month:', req.params.month);
-    
-    // Get the stored team target
-    const [teamResults] = await oldPool.query(
-      'SELECT goal_count FROM monthly_goals WHERE month = ? AND advisor_name = "TEAM"',
-      [req.params.month]
-    );
-    
-    console.log('Team target found:', teamResults);
-    
-    if (teamResults.length > 0) {
-      // Return the stored team target
-      res.json({ goal_count: teamResults[0].goal_count });
-    } else {
-      // No team target set
-      res.json({ goal_count: 0 });
-    }
-    
+    const context = getTenantContext(req, res);
+    if (!context) return;
+
+    const goal = await goalsService.getStoredTeamGoal(context, req.params.month);
+    res.json({ goal_count: goal?.goalCount || 0 });
   } catch (error) {
-    console.error('Error details:', {
-      message: error.message,
-      code: error.code,
-      sqlMessage: error.sqlMessage,
-      sql: error.sql
-    });
-    
-    res.status(500).json({ 
-      message: 'Error fetching team target',
-      details: error.sqlMessage || error.message
-    });
+    handleGoalsError(res, error, 'Error fetching team target');
   }
 });
 
 router.post('/team', authenticate, async (req, res) => {
   try {
+    const context = getTenantContext(req, res);
+    if (!context) return;
+
     const { month, goal_count } = req.body;
-    
-    console.log('Setting team goal:', { month, goal_count });
-    
-    // For team goals, we'll store it as a special "TEAM" advisor entry
-    // This allows us to have both individual goals and a team goal
-    const [result] = await oldPool.query(
-      `INSERT INTO monthly_goals (advisor_name, month, goal_count) 
-       VALUES (?, ?, ?)
-       ON DUPLICATE KEY UPDATE goal_count = ?`,
-      ['TEAM', month, goal_count, goal_count]
-    );
-    
-    console.log('Team goal saved successfully:', result);
-    
-    res.json({ 
+    const goal = await goalsService.upsertGoal(context, {
+      advisorName: TEAM_ADVISOR,
+      month,
+      goalCount: Number(goal_count),
+      scope: 'team'
+    });
+
+    res.json({
       message: 'Team goal saved successfully',
-      goal: { month, goal_count }
+      goal: { month: goal.month, goal_count: goal.goalCount }
     });
-    
   } catch (error) {
-    console.error('Error saving team goal:', {
-      error: error.message,
-      code: error.code,
-      sqlMessage: error.sqlMessage,
-      sql: error.sql
-    });
-    
-    res.status(500).json({ 
-      message: 'Error saving team goal',
-      details: error.sqlMessage || error.message
-    });
+    handleGoalsError(res, error, 'Error saving team goal');
   }
 });
 
-// 2. Then the more generic routes
 router.get('/month/:month', authenticate, async (req, res) => {
   try {
-    const { month } = req.params;
-    const [results] = await oldPool.query(
-      'SELECT advisor_name, goal_count FROM monthly_goals WHERE month = ?',
-      [month]
-    );
-    res.json(results);
+    const context = getTenantContext(req, res);
+    if (!context) return;
+
+    const goals = await goalsService.listMonthGoals(context, req.params.month);
+    res.json(goals.map(goal => ({
+      advisor_name: goal.advisorName,
+      goal_count: goal.goalCount
+    })));
   } catch (error) {
-    console.error('Error fetching goals:', error);
-    res.status(500).json({ message: 'Error fetching goals' });
+    handleGoalsError(res, error, 'Error fetching goals');
   }
 });
 
-// Get goal for specific advisor and month
 router.get('/:advisor/:month', authenticate, async (req, res) => {
   try {
+    const context = getTenantContext(req, res);
+    if (!context) return;
+
     const { advisor, month } = req.params;
-    const [results] = await oldPool.query(
-      'SELECT goal_count FROM monthly_goals WHERE advisor_name = ? AND month = ?',
-      [advisor, month]
-    );
-    res.json(results[0] || { goal_count: 0 });
+    const goal = await goalsService.getAdvisorGoal(context, advisor, month);
+    res.json(goal ? { goal_count: goal.goalCount } : { goal_count: 0 });
   } catch (error) {
-    console.error('Error fetching goal:', error);
-    res.status(500).json({ message: 'Error fetching goal' });
+    handleGoalsError(res, error, 'Error fetching goal');
   }
 });
 
-// Set goal for advisor and month
 router.post('/', authenticate, async (req, res) => {
   try {
-    console.log('Received goal POST request:', req.body);
-    console.log('Auth data:', req.auth);
-    const { advisor, month, goal_count } = req.body;
-    
-    // Validate input
-    if (!advisor || !month || goal_count === undefined) {
-      return res.status(400).json({ 
-        message: 'Missing required fields',
-        received: { advisor, month, goal_count }
-      });
-    }
+    const context = getTenantContext(req, res);
+    if (!context) return;
 
-    // Allow admins to set goals for anyone, but regular users can only set their own
-    if (req.auth.role !== 'Admin' && req.auth.name !== advisor) {
-      console.log('Unauthorized: user', req.auth.name, 'trying to set goal for', advisor);
+    const { advisor, month, goal_count } = req.body;
+
+    if (context.role !== 'Admin' && context.actorName !== advisor) {
       return res.status(403).json({ message: 'Unauthorized to set this goal' });
     }
 
-    console.log('Executing query with values:', { advisor, month, goal_count });
-    const [result] = await oldPool.query(
-      `REPLACE INTO monthly_goals (advisor_name, month, goal_count)
-       VALUES (?, ?, ?)`,
-      [advisor, month, goal_count]
-    );
+    const goal = await goalsService.upsertGoal(context, {
+      advisorName: advisor,
+      month,
+      goalCount: Number(goal_count),
+      scope: 'individual'
+    });
 
-    console.log('Goal saved successfully:', result);
-    res.json({ 
+    res.json({
       message: 'Goal saved successfully',
       goal: {
-        advisor,
-        month,
-        goal_count
+        advisor: goal.advisorName,
+        month: goal.month,
+        goal_count: goal.goalCount
       }
     });
   } catch (error) {
-    console.error('Error saving goal:', {
-      message: error.message,
-      stack: error.stack,
-      sql: error.sql,
-      sqlMessage: error.sqlMessage
-    });
-    res.status(500).json({ 
-      message: 'Error saving goal',
-      details: error.sqlMessage || error.message
-    });
+    handleGoalsError(res, error, 'Error saving goal');
   }
 });
 
