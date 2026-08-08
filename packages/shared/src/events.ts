@@ -1,4 +1,4 @@
-﻿export const enterpriseEventTypes = [
+export const enterpriseEventTypes = [
   "organization.created",
   "store.created",
   "user.invited",
@@ -16,6 +16,9 @@
   "goal.created",
   "goal.updated",
   "contest.created",
+  "contest.updated",
+  "contest.score.updated",
+  "contest.published",
   "contest.closed",
   "leaderboard.recalculated",
   "reward.awarded",
@@ -37,3 +40,4 @@ export type EnterpriseEvent<TPayload extends Record<string, unknown> = Record<st
   occurredAt: string;
   correlationId?: string;
 };
+

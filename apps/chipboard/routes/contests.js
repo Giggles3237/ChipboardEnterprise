@@ -2,8 +2,23 @@ const express = require('express');
 const router = express.Router();
 const { authenticate } = require('../middleware/auth');
 const { oldPool } = require('../db');
+const { createContestService } = require('../services/contestsService');
 
 const managerRoles = ['Admin', 'Manager'];
+const contestsService = createContestService(oldPool);
+
+const getEnterpriseContext = (req) => ({
+  organizationId: req.auth?.organizationId,
+  actorUserId: req.auth?.userId,
+  actorName: req.auth?.name || req.auth?.email,
+  role: req.auth?.role,
+  correlationId: req.headers?.['x-correlation-id']
+});
+
+const sendError = (res, error, fallbackMessage) => {
+  const statusCode = error.statusCode || 500;
+  return res.status(statusCode).json({ message: statusCode === 500 ? fallbackMessage : error.message, error: error.message });
+};
 
 const isAdmin = (req) => req.auth?.role === 'Admin';
 
@@ -455,61 +470,24 @@ router.put('/:contestId/setup', requireManager, async (req, res) => {
     const { contest, categories } = req.body;
     const contestId = req.params.contestId;
 
-    await oldPool.query(`
-      UPDATE contests
-      SET name = ?, start_date = ?, end_date = ?, target_points = ?, branding_logo = ?, is_enabled = ?, status = ?
-      WHERE id = ?
-    `, [
-      contest.name,
-      contest.start_date,
-      contest.end_date,
-      Number(contest.target_points || contest.targetPoints || 0),
-      contest.branding_logo || contest.brandingLogo || null,
-      contest.is_enabled || contest.isEnabled ? 1 : 0,
-      contest.status || 'active',
-      contestId
-    ]);
-
-    if (Array.isArray(categories)) {
-      for (const [index, category] of categories.entries()) {
-        if (category.id) {
-          await oldPool.query(`
-            UPDATE contest_categories
-            SET name = ?, point_value = ?, target_points = ?, sale_type_match = ?, is_rewards = ?, sort_order = ?
-            WHERE id = ? AND contest_id = ?
-          `, [
-            category.name,
-            Number(category.point_value || category.pointValue || 0),
-            category.target_points ?? category.targetPoints ?? null,
-            category.sale_type_match || category.saleTypeMatch || category.name,
-            category.is_rewards ? 1 : 0,
-            index + 1,
-            category.id,
-            contestId
-          ]);
-        } else {
-          await oldPool.query(`
-            INSERT INTO contest_categories
-              (contest_id, name, point_value, target_points, sale_type_match, is_rewards, sort_order)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-          `, [
-            contestId,
-            category.name,
-            Number(category.point_value || category.pointValue || 0),
-            category.target_points ?? category.targetPoints ?? null,
-            category.sale_type_match || category.saleTypeMatch || category.name,
-            category.is_rewards ? 1 : 0,
-            index + 1
-          ]);
-        }
-      }
-    }
+    await contestsService.updateSetup(getEnterpriseContext(req), contestId, {
+      contest: {
+        name: contest.name,
+        startDate: contest.start_date,
+        endDate: contest.end_date,
+        targetPoints: Number(contest.target_points || contest.targetPoints || 0),
+        brandingLogo: contest.branding_logo || contest.brandingLogo || null,
+        isEnabled: Boolean(contest.is_enabled || contest.isEnabled),
+        status: contest.status || 'active'
+      },
+      categories
+    });
 
     const bundle = await loadContestBundle(contestId, req);
     res.json(bundle);
   } catch (error) {
     console.error('Error saving contest setup:', error);
-    res.status(500).json({ message: 'Error saving contest setup', error: error.message });
+    sendError(res, error, 'Error saving contest setup');
   }
 });
 
@@ -527,36 +505,20 @@ router.post('/:contestId/deals/:saleId/score', requireManager, requireEnabledCon
       rewardsPoints
     } = req.body;
 
-    await oldPool.query(`
-      INSERT INTO contest_deal_scores
-        (contest_id, sale_id, advisor, category_id, count_toward, rewards_completed, status, base_points, rewards_points, reviewed_by)
-      VALUES (?, ?, ?, ?, ?, ?, 'pending', ?, ?, ?)
-      ON DUPLICATE KEY UPDATE
-        advisor = VALUES(advisor),
-        category_id = VALUES(category_id),
-        count_toward = VALUES(count_toward),
-        rewards_completed = VALUES(rewards_completed),
-        status = IF(status = 'published', 'published', 'pending'),
-        base_points = VALUES(base_points),
-        rewards_points = VALUES(rewards_points),
-        reviewed_by = VALUES(reviewed_by)
-    `, [
-      contestId,
-      saleId,
+    await contestsService.scoreDeal(getEnterpriseContext(req), contestId, saleId, {
       advisor,
-      categoryId || null,
-      countToward ? 1 : 0,
-      rewardsCompleted ? 1 : 0,
-      Number(basePoints || 0),
-      Number(rewardsPoints || 0),
-      req.auth.userId
-    ]);
+      categoryId,
+      countToward,
+      rewardsCompleted,
+      basePoints: Number(basePoints || 0),
+      rewardsPoints: Number(rewardsPoints || 0)
+    });
 
     const bundle = await loadContestBundle(contestId, req);
     res.json(bundle);
   } catch (error) {
     console.error('Error scoring contest deal:', error);
-    res.status(500).json({ message: 'Error scoring contest deal', error: error.message });
+    sendError(res, error, 'Error scoring contest deal');
   }
 });
 
@@ -565,34 +527,13 @@ router.post('/:contestId/publish', requireManager, requireEnabledContest, async 
     await ensureSchema();
     const contestId = req.params.contestId;
 
-    await oldPool.query(`
-      UPDATE contest_deal_scores
-      SET status = 'published', published_by = ?, published_at = NOW()
-      WHERE contest_id = ? AND status = 'pending' AND (count_toward = 1 OR rewards_completed = 1)
-    `, [req.auth.userId, contestId]);
-
-    await oldPool.query(`
-      UPDATE contests
-      SET status = 'closed'
-      WHERE id = ?
-      AND target_points > 0
-      AND target_points <= (
-        SELECT total_points FROM (
-          SELECT
-            COALESCE(SUM(CASE WHEN count_toward = 1 THEN base_points ELSE 0 END), 0) +
-            COALESCE(SUM(CASE WHEN rewards_completed = 1 THEN rewards_points ELSE 0 END), 0) +
-            COALESCE((SELECT SUM(points) FROM contest_bonuses WHERE contest_id = ? AND status = 'published'), 0) AS total_points
-          FROM contest_deal_scores
-          WHERE contest_id = ? AND status = 'published'
-        ) totals
-      )
-    `, [contestId, contestId, contestId]);
+    await contestsService.publishPendingScores(getEnterpriseContext(req), contestId);
 
     const bundle = await loadContestBundle(contestId, req);
     res.json(bundle);
   } catch (error) {
     console.error('Error publishing contest scores:', error);
-    res.status(500).json({ message: 'Error publishing contest scores', error: error.message });
+    sendError(res, error, 'Error publishing contest scores');
   }
 });
 
@@ -602,34 +543,31 @@ router.post('/:contestId/bonuses', requireManager, requireEnabledContest, async 
     const contestId = req.params.contestId;
     const { advisor, reason, points } = req.body;
 
-    if (!advisor || !reason || !Number(points)) {
-      return res.status(400).json({ message: 'Advisor, reason, and points are required' });
-    }
-
-    await oldPool.query(`
-      INSERT INTO contest_bonuses
-        (contest_id, advisor, reason, points, status, awarded_by, published_at)
-      VALUES (?, ?, ?, ?, 'published', ?, NOW())
-    `, [contestId, advisor, reason, Number(points), req.auth.userId]);
+    await contestsService.addBonus(getEnterpriseContext(req), contestId, {
+      advisor,
+      reason,
+      points: Number(points)
+    });
 
     const bundle = await loadContestBundle(contestId, req);
     res.json(bundle);
   } catch (error) {
     console.error('Error adding contest bonus:', error);
-    res.status(500).json({ message: 'Error adding contest bonus', error: error.message });
+    sendError(res, error, 'Error adding contest bonus');
   }
 });
 
 router.post('/:contestId/close', requireManager, requireEnabledContest, async (req, res) => {
   try {
     await ensureSchema();
-    await oldPool.query('UPDATE contests SET status = ? WHERE id = ?', ['closed', req.params.contestId]);
+    await contestsService.closeContest(getEnterpriseContext(req), req.params.contestId);
     const bundle = await loadContestBundle(req.params.contestId, req);
     res.json(bundle);
   } catch (error) {
     console.error('Error closing contest:', error);
-    res.status(500).json({ message: 'Error closing contest', error: error.message });
+    sendError(res, error, 'Error closing contest');
   }
 });
 
 module.exports = router;
+
