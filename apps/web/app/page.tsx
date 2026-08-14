@@ -1,7 +1,14 @@
 import styles from "./page.module.css";
 
 export default function Home() {
-  const navItems = ["Overview", "Sales", "Leaderboards", "Goals", "Contests", "Settings"];
+  const navItems = [
+    { label: "Overview", href: "/" },
+    { label: "Sales", href: "/sales" },
+    { label: "Leaderboards", href: "#leaderboards" },
+    { label: "Goals", href: "#goals" },
+    { label: "Contests", href: "#contests" },
+    { label: "Admin", href: "/admin" },
+  ];
 
   const metrics = [
     { label: "Today sales", value: "42", detail: "Across 4 stores" },
@@ -11,10 +18,10 @@ export default function Home() {
   ];
 
   const workQueue = [
-    "Connect Clerk Organizations before inviting stores",
+    "Build in-app user administration for dealer groups and stores",
     "Apply the initial Azure PostgreSQL migration",
     "Map Classic sales fields into enterprise contracts",
-    "Confirm production domain and callback URLs",
+    "Confirm production domain and internal auth session strategy",
   ];
 
   const leaderboard = [
@@ -36,8 +43,12 @@ export default function Home() {
         </div>
         <nav className={styles.navList}>
           {navItems.map((item) => (
-            <a className={item === "Overview" ? `${styles.navItem} ${styles.active}` : styles.navItem} href={`#${item.toLowerCase()}`} key={item}>
-              {item}
+            <a
+              className={item.label === "Overview" ? `${styles.navItem} ${styles.active}` : styles.navItem}
+              href={item.href}
+              key={item.label}
+            >
+              {item.label}
             </a>
           ))}
         </nav>
@@ -122,8 +133,8 @@ export default function Home() {
                 <dd>Azure PostgreSQL selected</dd>
               </div>
               <div>
-                <dt>Auth</dt>
-                <dd>Clerk pending</dd>
+                <dt>Users</dt>
+                <dd>In-app admin planned</dd>
               </div>
               <div>
                 <dt>Health route</dt>
@@ -136,3 +147,4 @@ export default function Home() {
     </main>
   );
 }
+

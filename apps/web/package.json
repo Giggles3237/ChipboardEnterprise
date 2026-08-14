@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
+    "drizzle-orm": "^0.45.2",
     "next": "16.2.0",
+    "pg": "^8.22.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
@@ -20,6 +22,7 @@
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^22.15.3",
+    "@types/pg": "^8.20.3",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "eslint": "^9.39.1",

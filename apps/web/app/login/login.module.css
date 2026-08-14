@@ -1,0 +1,77 @@
+.page {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #f4f1eb;
+  color: #172026;
+}
+
+.panel {
+  width: min(440px, 100%);
+  border: 1px solid #d8d0c4;
+  border-radius: 8px;
+  background: #fffaf1;
+  box-shadow: 0 16px 36px rgba(23, 32, 38, 0.08);
+  padding: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: #66757f;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.panel h1 {
+  margin: 0;
+  font-size: 38px;
+  letter-spacing: 0;
+}
+
+.panel p {
+  color: #4b5b64;
+  font-weight: 650;
+}
+
+.form {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.form label {
+  display: grid;
+  gap: 6px;
+  color: #4b5b64;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.form input {
+  min-height: 42px;
+  border: 1px solid #c9bfb2;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #172026;
+  padding: 0 10px;
+  font: inherit;
+}
+
+.form button {
+  min-height: 42px;
+  border: 1px solid #172026;
+  border-radius: 8px;
+  background: #172026;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.panel a {
+  color: #172026;
+  font-weight: 800;
+}

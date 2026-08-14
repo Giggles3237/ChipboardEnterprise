@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  transpilePackages: ["@chipboard/database", "@chipboard/sales", "@chipboard/shared"],
+};
 
 export default nextConfig;

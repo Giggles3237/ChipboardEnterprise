@@ -75,6 +75,7 @@ export const users = pgTable(
     externalAuthId: varchar("external_auth_id", { length: 191 }),
     email: varchar("email", { length: 254 }).notNull(),
     displayName: varchar("display_name", { length: 160 }).notNull(),
+    passwordHash: text("password_hash"),
     status: userStatus("status").default("invited").notNull(),
     ...timestamps,
   },
@@ -139,6 +140,7 @@ export const sales = pgTable(
     make: varchar("make", { length: 80 }),
     model: varchar("model", { length: 120 }),
     color: varchar("color", { length: 80 }),
+    advisor: varchar("advisor", { length: 160 }),
     deliveryStatus: saleDeliveryStatus("delivery_status").default("pending").notNull(),
     deliveryDate: timestamp("delivery_date", { withTimezone: true }),
     saleType: varchar("sale_type", { length: 80 }),
@@ -278,3 +280,6 @@ export const enterpriseSchemaPlan: TableRequirement[] = [
     notes: "Immutable trail of important customer data changes.",
   },
 ];
+
+
+
