@@ -143,6 +143,137 @@
   min-height: auto;
 }
 
+.chipBoard {
+  width: 100%;
+  margin: 0 0 18px;
+  padding: 18px max(24px, 5vw) 28px;
+  background: #ffffff;
+  border-top: 1px solid #d6dce2;
+  border-bottom: 1px solid #d6dce2;
+}
+
+.boardTotals {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin: 0 0 22px;
+  padding: 0 0 12px;
+  border-bottom: 1px solid #d6dce2;
+  color: #172026;
+  font-size: 16px;
+}
+
+.boardTotals strong {
+  color: #0653b6;
+  font-size: 18px;
+}
+
+.emptyBoard {
+  margin: 0;
+  color: #66757f;
+  font-weight: 700;
+}
+
+.advisorSection {
+  margin: 0 0 24px;
+  padding: 0 0 12px;
+}
+
+.advisorHeading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 10px;
+  padding: 0 0 9px;
+  border-bottom: 1px solid #d6dce2;
+}
+
+.advisorHeading h3 {
+  margin: 0;
+  min-width: 150px;
+  color: #050b12;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.advisorHeading span {
+  color: #172026;
+  font-weight: 800;
+}
+
+.advisorHeading small {
+  color: #7a858c;
+  font-weight: 600;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  align-items: center;
+}
+
+.saleChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 92px;
+  width: 92px;
+  height: 28px;
+  border-radius: 0;
+  border: 1px solid #0653b6;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  padding: 2px 8px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.saleChip:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.28);
+  transform: translateY(-3px) scale(1.04);
+  z-index: 2;
+}
+
+.chipDelivered {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+.chipPending {
+  opacity: 0.72;
+  transform: rotate(10deg);
+}
+
+.chipPending:hover {
+  transform: translateY(-3px) scale(1.04) rotate(10deg);
+}
+
+.bmwChip {
+  background: #ffffff;
+  color: #0653b6;
+}
+
+.miniChip {
+  background: #70b62c;
+  border-color: #70b62c;
+  color: #ffffff;
+}
+
+.usedChip {
+  background: #0653b6;
+  color: #ffffff;
+}
+
+.wholesaleChip {
+  background: #ffc107;
+  border-color: #e0a800;
+  color: #5d4037;
+}
+
 .tableScroller {
   overflow-x: auto;
 }

@@ -1,9 +1,15 @@
 .navbar {
-  padding: 0.5rem 1rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 0.35rem 1rem;
+  box-shadow: none;
   border-bottom: 2px solid var(--bmw-blue);
   background-color: var(--background-color) !important;
   transition: all 0.3s ease;
+}
+
+.navbar .container {
+  max-width: none;
+  padding-left: 28px;
+  padding-right: 28px;
 }
 
 .navbar-brand {
@@ -23,16 +29,16 @@
 
 .navbar-text {
   color: var(--text-color);
-  padding: 5px 10px;
-  background-color: var(--background-color);
-  border-radius: 4px;
+  padding: 4px 10px;
+  background-color: transparent;
+  border-radius: 0;
   margin-right: 15px;
   transition: all 0.3s ease;
 }
 
 /* Dark mode specific styles */
 .night-mode .navbar {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: none;
   background-color: var(--background-color) !important;
 }
 
@@ -75,7 +81,7 @@
   .navbar-text {
     text-align: right;
     font-size: 0.9rem;
-    padding: 0.5rem 1rem;
+    padding: 0.35rem 1rem;
     margin: 0;
   }
 
@@ -96,7 +102,7 @@
 
 /* Logo styles */
 .navbar-logo {
-  height: 100px;
+  height: 82px;
   width: auto;
   margin-right: 10px;
   transition: filter 0.3s ease;

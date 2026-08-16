@@ -381,9 +381,7 @@ function App() {
                       </label>
                     </div>
                   </div>
-                  <div className="zoom-125">
-                    <ChipTable sales={filteredSales || sales} onEdit={setEditingSale} />
-                  </div>
+                  <ChipTable sales={filteredSales || sales} onEdit={setEditingSale} />
                   </>
                 </PrivateRoute>
               ) : (

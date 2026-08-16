@@ -26,7 +26,7 @@ html, body, #root {
 /* Main container */
 .chip-table-container {
   position: relative;
-  padding: 20px;
+  padding: 12px 20px 80px;
   padding-bottom: 80px;
   min-height: 100vh;
   height: auto;
@@ -37,7 +37,7 @@ html, body, #root {
 .chip-table {
   width: 90%;
   margin: 0 auto;
-  padding-bottom: 60px;
+  padding: 20px 0 60px;
   min-height: 100vh;
   height: auto;
   border-collapse: collapse;
@@ -52,13 +52,13 @@ html, body, #root {
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 10px 12px;
   padding: 5px 0;
 }
 
 /* Keep header visible but not fixed */
 .team-goal {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   background: var(--surface-color);
   z-index: 1;
   position: relative;
@@ -88,10 +88,11 @@ html, body, #root {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--light-gray);
-  padding: 8px 16px;
+  background: transparent;
+  padding: 8px 0;
   margin: 0 0 8px 0;
   width: 100%;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .advisor-name h3 {
@@ -112,10 +113,10 @@ html, body, #root {
 
 /* Remove any overflow settings from parent containers */
 .advisor-section {
-  margin-bottom: 20px;
-  padding: 10px;
-  border-radius: 8px;
-  padding-bottom: 15px;
+  margin-bottom: 22px;
+  padding: 0;
+  border-radius: 0;
+  padding-bottom: 12px;
 }
 
 .advisor-section:hover {
@@ -265,11 +266,11 @@ html, body, #root {
 .totals-container {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
-  background-color: var(--surface-alt-color);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  margin-bottom: 22px;
 }
 
 .totals-left, .totals-right {
@@ -470,7 +471,7 @@ html, body, #root {
   margin: 20px auto;
   padding: 10px 15px;
   background-color: rgba(0, 0, 0, 0.03);
-  border-radius: 8px;
+  border-radius: 0;
   font-size: 13px;
 }
 

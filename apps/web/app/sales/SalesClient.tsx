@@ -205,6 +205,28 @@ export default function SalesClient() {
     ];
   }, [filters, sales]);
 
+  const groupedSales = useMemo(() => {
+    const groups = filteredSales.reduce<Record<string, Sale[]>>((acc, sale) => {
+      const advisor = sale.advisor?.trim() || "Unassigned";
+      acc[advisor] = acc[advisor] ?? [];
+      acc[advisor].push(sale);
+      return acc;
+    }, {});
+
+    return Object.entries(groups)
+      .map(([advisor, advisorSales]) => ({
+        advisor,
+        sales: advisorSales,
+        delivered: advisorSales.filter((sale) => sale.deliveryStatus === "delivered" && sale.saleType !== "Wholesale").length,
+        pending: advisorSales.filter((sale) => sale.deliveryStatus !== "delivered" && sale.saleType !== "Wholesale").length,
+      }))
+      .sort((a, b) => {
+        if (a.advisor.toLowerCase().includes("house")) return 1;
+        if (b.advisor.toLowerCase().includes("house")) return -1;
+        return b.delivered + b.pending - (a.delivered + a.pending) || a.advisor.localeCompare(b.advisor);
+      });
+  }, [filteredSales]);
+
   async function signOut() {
     await fetch("/api/auth/logout", { method: "POST" });
     setSignedInUser("");
@@ -382,6 +404,49 @@ export default function SalesClient() {
           <label className={styles.checkLabel}><input type="checkbox" checked={form.delivered} onChange={(event) => setForm({ ...form, delivered: event.target.checked })} /> Delivered</label>
           <button className={styles.primaryButton} type="submit" disabled={isLoading}>{editingSaleId ? "Save changes" : "Add sale"}</button>
         </form>
+      </section>
+
+      <section className={styles.chipBoard} aria-label="Sales chip board">
+        <div className={styles.boardTotals}>
+          <strong>Totals</strong>
+          <span>BMW/MINI {filteredSales.filter((sale) => sale.saleType !== "Wholesale").length}</span>
+          <span>Wholesale {filteredSales.filter((sale) => sale.saleType === "Wholesale").length}</span>
+        </div>
+        {groupedSales.length === 0 ? (
+          <p className={styles.emptyBoard}>Load sales or clear filters to show chips.</p>
+        ) : groupedSales.map((group) => (
+          <div className={styles.advisorSection} key={group.advisor}>
+            <div className={styles.advisorHeading}>
+              <h3>{properCase(group.advisor)}</h3>
+              <span>{group.delivered} <small>({group.pending})</small></span>
+            </div>
+            <div className={styles.chips}>
+              {group.sales.map((sale) => {
+                const isDelivered = sale.deliveryStatus === "delivered";
+                const type = sale.saleType ?? "";
+                const chipClass = type === "Wholesale"
+                  ? styles.wholesaleChip
+                  : type.includes("MINI")
+                    ? styles.miniChip
+                    : type.includes("Used") || type.includes("CPO")
+                      ? styles.usedChip
+                      : styles.bmwChip;
+
+                return (
+                  <button
+                    className={`${styles.saleChip} ${chipClass} ${isDelivered ? styles.chipDelivered : styles.chipPending}`}
+                    key={sale.id}
+                    title={`${stockDisplay(sale.stockNumber)} - ${properCase(sale.color)} ${sale.year ?? ""} ${properCase(sale.make)} ${properCase(sale.model)}`}
+                    type="button"
+                    onClick={() => { setEditingSaleId(sale.id); setForm(toForm(sale)); }}
+                  >
+                    {stockDisplay(sale.stockNumber)}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </section>
 
       <section className={styles.tablePanel}>
