@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -6,36 +8,36 @@ export default function Home() {
     { label: "Sales", href: "/sales" },
     { label: "Leaderboards", href: "#leaderboards" },
     { label: "Goals", href: "#goals" },
-    { label: "Contests", href: "#contests" },
     { label: "Admin", href: "/admin" },
   ];
 
   const metrics = [
-    { label: "Today sales", value: "42", detail: "Across 4 stores" },
+    { label: "Today sales", value: "42", detail: "BMW/MINI of Pittsburgh" },
     { label: "Active goals", value: "18", detail: "7 ahead of pace" },
-    { label: "Open contests", value: "5", detail: "2 ending this week" },
-    { label: "Stores online", value: "4/4", detail: "Live sync ready" },
+    { label: "Store online", value: "1/1", detail: "Live sync ready" },
   ];
 
   const workQueue = [
-    "Build in-app user administration for dealer groups and stores",
-    "Apply the initial Azure PostgreSQL migration",
-    "Map Classic sales fields into enterprise contracts",
-    "Confirm production domain and internal auth session strategy",
+    "Import BMW/MINI of Pittsburgh users into the enterprise tenant",
+    "Import Classic sales history into PostgreSQL",
+    "Compare migrated totals against Classic Chipboard",
+    "Protect admin with role-based access before production cutover",
   ];
 
   const leaderboard = [
-    { name: "North Store", score: "128", trend: "+14" },
-    { name: "West Store", score: "116", trend: "+9" },
-    { name: "Central Store", score: "104", trend: "+6" },
-    { name: "South Store", score: "97", trend: "+3" },
+    { name: "BMW Sales", score: "128", trend: "+14" },
+    { name: "MINI Sales", score: "116", trend: "+9" },
+    { name: "Finance", score: "104", trend: "+6" },
+    { name: "Delivery", score: "97", trend: "+3" },
   ];
 
   return (
     <main className={styles.shell}>
       <aside className={styles.sidebar} aria-label="Workspace navigation">
         <div className={styles.brandBlock}>
-          <div className={styles.brandMark} aria-hidden="true">C</div>
+          <div className={styles.brandMark} aria-hidden="true">
+            <Image src="/assets/images/logo.png" alt="" width={40} height={40} priority />
+          </div>
           <div>
             <p className={styles.eyebrow}>Enterprise</p>
             <h1>Chipboard</h1>
@@ -54,8 +56,8 @@ export default function Home() {
         </nav>
         <div className={styles.tenantPanel}>
           <p className={styles.eyebrow}>Organization</p>
-          <strong>Demo Dealer Group</strong>
-          <span>4 stores - Eastern time</span>
+          <strong>BMW/MINI of Pittsburgh</strong>
+          <span>Chipboard tenant - Eastern time</span>
         </div>
       </aside>
 
@@ -63,9 +65,9 @@ export default function Home() {
         <header className={styles.topbar}>
           <div>
             <p className={styles.eyebrow}>Operations command center</p>
-            <h2>Deployment-ready platform shell</h2>
+            <h2>BMW/MINI of Pittsburgh workspace</h2>
           </div>
-          <div className={styles.statusPill}>Build passing</div>
+          <div className={styles.statusPill}>Migration ready</div>
         </header>
 
         <section className={styles.metricGrid} aria-label="Enterprise summary">
@@ -130,11 +132,11 @@ export default function Home() {
               </div>
               <div>
                 <dt>Database</dt>
-                <dd>Azure PostgreSQL selected</dd>
+                <dd>Azure PostgreSQL connected</dd>
               </div>
               <div>
-                <dt>Users</dt>
-                <dd>In-app admin planned</dd>
+                <dt>Tenant</dt>
+                <dd>BMW/MINI of Pittsburgh</dd>
               </div>
               <div>
                 <dt>Health route</dt>
@@ -147,4 +149,3 @@ export default function Home() {
     </main>
   );
 }
-

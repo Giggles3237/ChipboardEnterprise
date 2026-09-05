@@ -1,8 +1,9 @@
 .page {
   min-height: 100svh;
-  padding: 28px;
-  background: #f4f1eb;
+  padding: 24px;
+  background: #f6f8fb;
   color: #172026;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .header,
@@ -16,8 +17,19 @@
   gap: 16px;
 }
 
+.header,
+.contextBar,
+.statusBar,
+.formPanel,
+.chipBoard,
+.tablePanel {
+  max-width: 1560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .header {
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
 
 .header h1,
@@ -28,77 +40,105 @@
 }
 
 .header h1 {
-  font-size: 42px;
+  font-size: 34px;
+  font-weight: 700;
   line-height: 1;
 }
 
 .eyebrow {
   margin: 0 0 6px;
-  color: #66757f;
+  color: #62717d;
   font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
+  font-weight: 600;
+  text-transform: none;
 }
 
 .backLink,
 .contextBar button,
 .panelHeading button,
 .primaryButton,
-.actions button {
-  min-height: 38px;
-  border: 1px solid #c9bfb2;
-  border-radius: 8px;
-  background: #fffaf1;
+.actions button,
+.headerActions button {
+  min-height: 36px;
+  border: 1px solid #d3dbe3;
+  border-radius: 6px;
+  background: #ffffff;
   color: #172026;
   padding: 0 12px;
   font: inherit;
-  font-weight: 750;
+  font-weight: 600;
   cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.backLink:hover,
+.contextBar button:hover,
+.panelHeading button:hover,
+.actions button:hover,
+.headerActions button:hover {
+  border-color: #0653b6;
+  box-shadow: 0 4px 14px rgba(6, 83, 182, 0.1);
 }
 
 .primaryButton {
-  background: #172026;
+  border-color: #0653b6;
+  background: #0653b6;
   color: #ffffff;
+}
+
+.primaryButton:hover {
+  box-shadow: 0 6px 18px rgba(6, 83, 182, 0.22);
+  transform: translateY(-1px);
 }
 
 .contextBar,
 .statusBar,
 .formPanel,
-.tablePanel {
-  border: 1px solid #d8d0c4;
+.tablePanel,
+.chipBoard {
+  border: 1px solid #d9e1e8;
   border-radius: 8px;
-  background: #fffaf1;
-  box-shadow: 0 16px 36px rgba(23, 32, 38, 0.08);
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(23, 32, 38, 0.06);
 }
 
 .contextBar {
   flex-wrap: wrap;
-  padding: 16px;
-  margin-bottom: 14px;
+  padding: 14px;
+  margin-bottom: 12px;
 }
 
 .contextBar label,
 .saleForm label {
   display: grid;
   gap: 6px;
-  color: #4b5b64;
-  font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
+  color: #52616d;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: none;
 }
 
 .contextBar input,
 .saleForm input,
 .saleForm select,
 .salesTable input {
-  min-height: 38px;
-  border: 1px solid #c9bfb2;
-  border-radius: 8px;
+  min-height: 36px;
+  border: 1px solid #d3dbe3;
+  border-radius: 6px;
   background: #ffffff;
   color: #172026;
   padding: 0 10px;
   font: inherit;
   text-transform: none;
+}
+
+.contextBar input:focus,
+.saleForm input:focus,
+.saleForm select:focus,
+.salesTable input:focus {
+  border-color: #0653b6;
+  box-shadow: 0 0 0 3px rgba(6, 83, 182, 0.12);
+  outline: none;
 }
 
 .contextBar input {
@@ -107,17 +147,17 @@
 }
 
 .statusBar {
-  min-height: 48px;
+  min-height: 44px;
   padding: 0 16px;
-  margin-bottom: 14px;
-  color: #4b5b64;
-  font-weight: 700;
+  margin-bottom: 12px;
+  color: #52616d;
+  font-weight: 600;
 }
 
 .formPanel,
 .tablePanel {
-  padding: 18px;
-  margin-bottom: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
 }
 
 .panelHeading {
@@ -132,7 +172,7 @@
 }
 
 .checkLabel {
-  min-height: 38px;
+  min-height: 36px;
   display: flex !important;
   align-items: center;
   gap: 8px !important;
@@ -145,38 +185,39 @@
 
 .chipBoard {
   width: 100%;
-  margin: 0 0 18px;
-  padding: 18px max(24px, 5vw) 28px;
-  background: #ffffff;
-  border-top: 1px solid #d6dce2;
-  border-bottom: 1px solid #d6dce2;
+  margin-bottom: 14px;
+  padding: 18px 24px 28px;
 }
 
 .boardTotals {
   display: flex;
   align-items: center;
   gap: 28px;
-  margin: 0 0 22px;
+  margin: 0 0 20px;
   padding: 0 0 12px;
-  border-bottom: 1px solid #d6dce2;
+  border-bottom: 1px solid #e1e7ed;
   color: #172026;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .boardTotals strong {
   color: #0653b6;
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .emptyBoard {
   margin: 0;
-  color: #66757f;
-  font-weight: 700;
+  color: #62717d;
+  font-weight: 600;
 }
 
 .advisorSection {
   margin: 0 0 24px;
   padding: 0 0 12px;
+}
+
+.advisorSection:last-child {
+  margin-bottom: 0;
 }
 
 .advisorHeading {
@@ -185,24 +226,24 @@
   gap: 14px;
   margin: 0 0 10px;
   padding: 0 0 9px;
-  border-bottom: 1px solid #d6dce2;
+  border-bottom: 1px solid #e1e7ed;
 }
 
 .advisorHeading h3 {
   margin: 0;
   min-width: 150px;
   color: #050b12;
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1.2;
 }
 
 .advisorHeading span {
   color: #172026;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .advisorHeading small {
-  color: #7a858c;
+  color: #7a8791;
   font-weight: 600;
 }
 
@@ -222,18 +263,18 @@
   height: 28px;
   border-radius: 0;
   border: 1px solid #0653b6;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(23, 32, 38, 0.16);
   padding: 2px 8px;
   font: inherit;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .saleChip:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 5px 12px rgba(23, 32, 38, 0.22);
   transform: translateY(-3px) scale(1.04);
   z-index: 2;
 }
@@ -287,14 +328,15 @@
 
 .salesTable th,
 .salesTable td {
-  border-bottom: 1px solid #e4dace;
-  padding: 10px;
+  border-bottom: 1px solid #e1e7ed;
+  padding: 10px 12px;
   text-align: left;
   vertical-align: middle;
 }
 
 .salesTable th {
-  color: #4b5b64;
+  background: #f8fafc;
+  color: #52616d;
   font-size: 12px;
   text-transform: capitalize;
 }
@@ -308,12 +350,12 @@
 }
 
 .salesTable tbody tr:hover {
-  background: #f3eadb;
+  background: #f4f8fd;
 }
 
 .wholesaleRow {
-  background: #f7f7f4;
-  color: #66757f;
+  background: #f8fafc;
+  color: #62717d;
 }
 
 .delivered,
@@ -324,7 +366,7 @@
   border-radius: 999px;
   padding: 0 10px;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .delivered {
@@ -342,7 +384,16 @@
   gap: 8px;
 }
 
+.headerActions span {
+  color: #52616d;
+  font-weight: 600;
+}
+
 @media (max-width: 920px) {
+  .page {
+    padding: 16px;
+  }
+
   .header,
   .statusBar,
   .panelHeading {
@@ -360,22 +411,170 @@
     width: 100%;
     min-width: 0;
   }
+
+  .boardTotals,
+  .advisorHeading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .advisorHeading h3 {
+    min-width: 0;
+  }
+}
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(8, 15, 25, 0.48);
 }
 
-.headerActions span {
-  color: #4b5b64;
-  font-weight: 750;
-}
-
-.headerActions button {
-  min-height: 38px;
-  border: 1px solid #c9bfb2;
+.saleModal {
+  width: min(760px, 100%);
+  max-height: min(860px, calc(100svh - 48px));
+  overflow: auto;
+  border: 1px solid #d9e1e8;
   border-radius: 8px;
-  background: #fffaf1;
+  background: #ffffff;
+  box-shadow: 0 24px 70px rgba(8, 15, 25, 0.28);
+  padding: 20px;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e1e7ed;
+}
+
+.modalHeader h2 {
+  margin: 0;
+  color: #0653b6;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.modalHeader button,
+.modalActions button {
+  min-height: 36px;
+  border: 1px solid #d3dbe3;
+  border-radius: 6px;
+  background: #ffffff;
   color: #172026;
   padding: 0 12px;
   font: inherit;
-  font-weight: 750;
+  font-weight: 600;
   cursor: pointer;
 }
 
+.saleSummary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.saleSummary strong,
+.saleSummary span {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #e1e7ed;
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: #f8fafc;
+}
+
+.modalActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 0;
+}
+
+.getReadyPanel {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #e1e7ed;
+}
+
+.getReadyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.getReadyGrid label,
+.comments {
+  display: grid;
+  gap: 6px;
+  color: #52616d;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.getReadyGrid input,
+.comments textarea {
+  min-height: 36px;
+  border: 1px solid #d3dbe3;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #172026;
+  padding: 8px 10px;
+  font: inherit;
+}
+
+.instructions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 12px;
+  margin: 14px 0;
+  border: 1px solid #e1e7ed;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.instructions legend {
+  padding: 0 6px;
+  color: #52616d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.instructions label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #172026;
+  font-size: 13px;
+}
+
+.comments textarea {
+  min-height: 78px;
+  resize: vertical;
+}
+
+@media (max-width: 760px) {
+  .saleSummary,
+  .getReadyGrid,
+  .instructions {
+    grid-template-columns: 1fr;
+  }
+}
+.configNote {
+  margin: 12px 0 0;
+  border: 1px solid #d9e1e8;
+  border-radius: 6px;
+  background: #f8fafc;
+  color: #52616d;
+  padding: 9px 10px;
+  font-size: 13px;
+  font-weight: 600;
+}

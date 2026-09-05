@@ -19,6 +19,8 @@ export type Store = {
   code: string;
   timezone: string;
   status: "active" | "inactive";
+  getReadyToEmails?: string;
+  getReadyCcEmails?: string;
 };
 
 export type Department = {

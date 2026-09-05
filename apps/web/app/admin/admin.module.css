@@ -6,17 +6,20 @@
 }
 
 .header,
-.statusBar,
 .actions,
-.grid,
-.contextPanel dl div {
+.statusBar,
+.statusBar div,
+.panelHeader,
+.heroGrid,
+.summaryPanel dl div {
   display: flex;
   gap: 16px;
 }
 
 .header,
 .statusBar,
-.contextPanel dl div {
+.panelHeader,
+.summaryPanel dl div {
   align-items: center;
   justify-content: space-between;
 }
@@ -26,8 +29,8 @@
 }
 
 .header h1,
-.panel h2,
-.contextPanel h2 {
+.summaryPanel h2,
+.panel h2 {
   margin: 0;
   letter-spacing: 0;
 }
@@ -45,9 +48,22 @@
   text-transform: uppercase;
 }
 
+.actions {
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.actions span {
+  color: #4b5b64;
+  font-weight: 750;
+}
+
 .actions a,
+.actions button,
 .statusBar button,
-.form button,
+.panelHeader button,
+.primaryButton,
 .rowButton,
 .selectedRow {
   min-height: 38px;
@@ -61,40 +77,133 @@
   cursor: pointer;
 }
 
+.actions button,
+.statusBar button,
+.panelHeader button {
+  white-space: nowrap;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.heroGrid {
+  align-items: stretch;
+  display: grid;
+  grid-template-columns: minmax(320px, 1.5fr) repeat(3, minmax(150px, 0.5fr));
+  margin-bottom: 16px;
+}
+
+.summaryPanel,
+.metricCard,
 .statusBar,
-.panel,
-.contextPanel {
+.panel {
   border: 1px solid #d8d0c4;
   border-radius: 8px;
   background: #fffaf1;
   box-shadow: 0 16px 36px rgba(23, 32, 38, 0.08);
 }
 
-.statusBar {
-  min-height: 52px;
-  margin-bottom: 16px;
-  padding: 0 16px;
+.summaryPanel,
+.metricCard,
+.panel {
+  min-width: 0;
+  padding: 18px;
+}
+
+.summaryPanel h2 {
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.summaryPanel dl {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 0;
+}
+
+.summaryPanel dl div {
+  padding-top: 10px;
+  border-top: 1px solid #e4dace;
+}
+
+.summaryPanel dt,
+.metricCard span,
+.metricCard p {
   color: #4b5b64;
   font-weight: 700;
 }
 
-.grid {
-  align-items: stretch;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-bottom: 16px;
+.summaryPanel dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 850;
 }
 
-.panel,
-.contextPanel {
-  min-width: 0;
-  padding: 18px;
+.metricCard span,
+.metricCard p {
+  font-size: 13px;
+}
+
+.metricCard strong {
+  display: block;
+  margin: 18px 0 8px;
+  font-size: 36px;
+  line-height: 1;
+}
+
+.metricCard p {
+  margin: 0;
+}
+
+.statusBar {
+  min-height: 58px;
+  margin-bottom: 16px;
+  padding: 10px 16px;
+  color: #4b5b64;
+  font-weight: 700;
+}
+
+.statusBar div {
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.statusBar input,
+.form input,
+.form select,
+.form textarea {
+  min-height: 38px;
+  border: 1px solid #c9bfb2;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #172026;
+  padding: 0 10px;
+  font: inherit;
+}
+
+.statusBar input {
+  width: min(34vw, 360px);
+  min-width: 220px;
+}
+
+.workspaceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.panelHeader {
+  margin-bottom: 16px;
 }
 
 .form {
   display: grid;
   gap: 10px;
-  margin: 16px 0;
+  margin-bottom: 16px;
 }
 
 .form label {
@@ -106,17 +215,7 @@
   text-transform: uppercase;
 }
 
-.form input {
-  min-height: 38px;
-  border: 1px solid #c9bfb2;
-  border-radius: 8px;
-  background: #ffffff;
-  color: #172026;
-  padding: 0 10px;
-  font: inherit;
-}
-
-.form button {
+.primaryButton {
   background: #172026;
   color: #ffffff;
 }
@@ -124,24 +223,50 @@
 .list {
   display: grid;
   gap: 8px;
+  max-height: 460px;
+  overflow: auto;
+  padding-right: 2px;
 }
 
 .rowButton,
 .selectedRow {
   display: grid;
-  gap: 4px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 10px;
   width: 100%;
-  min-height: 58px;
+  min-height: 64px;
   padding: 10px 12px;
   text-align: left;
 }
 
+.rowButton strong,
+.selectedRow strong,
 .rowButton span,
-.selectedRow span,
-.contextPanel p {
+.selectedRow span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowButton span,
+.selectedRow span {
   color: #66757f;
   font-size: 13px;
   font-weight: 650;
+}
+
+.rowButton em,
+.selectedRow em {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  align-self: center;
+  border-radius: 999px;
+  background: #e5edf0;
+  color: #334047;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+  padding: 6px 9px;
 }
 
 .selectedRow {
@@ -154,56 +279,58 @@
   color: #dce6e7;
 }
 
-.contextPanel dl {
-  display: grid;
-  gap: 10px;
-  margin: 14px 0;
+.selectedRow em {
+  background: #d8ff69;
+  color: #172026;
 }
 
-.contextPanel dl div {
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e4dace;
-}
+@media (max-width: 1180px) {
+  .heroGrid,
+  .workspaceGrid {
+    grid-template-columns: 1fr 1fr;
+  }
 
-.contextPanel dl div:last-child {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-
-.contextPanel dt {
-  color: #4b5b64;
-  font-weight: 750;
-}
-
-.contextPanel dd {
-  margin: 0;
-  text-align: right;
-  font-weight: 850;
-}
-
-.contextPanel p {
-  margin: 0;
-}
-
-@media (max-width: 980px) {
-  .grid {
-    grid-template-columns: 1fr;
+  .summaryPanel {
+    grid-column: 1 / -1;
   }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 760px) {
   .page {
     padding: 18px;
   }
 
   .header,
   .statusBar,
-  .contextPanel dl div {
+  .summaryPanel dl div,
+  .panelHeader {
     align-items: flex-start;
     flex-direction: column;
   }
 
-  .contextPanel dd {
+  .actions,
+  .statusBar div {
+    justify-content: flex-start;
+  }
+
+  .heroGrid,
+  .workspaceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .summaryPanel dd {
     text-align: left;
   }
+
+  .statusBar input {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+
+.form textarea {
+  min-height: 64px;
+  padding: 8px 10px;
+  resize: vertical;
 }

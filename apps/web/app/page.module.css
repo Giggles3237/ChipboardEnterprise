@@ -29,12 +29,19 @@
 .brandMark {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   border-radius: 8px;
-  background: #d8ff69;
-  color: #172026;
-  font-weight: 800;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.brandMark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
 }
 
 .brandBlock h1,
@@ -347,3 +354,4 @@
     text-align: left;
   }
 }
+

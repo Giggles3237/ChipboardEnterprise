@@ -11,7 +11,12 @@
     "db:migrate": "pnpm --filter @chipboard/database db:migrate",
     "db:push": "pnpm --filter @chipboard/database db:push",
     "db:check": "pnpm --filter @chipboard/database db:check",
-    "db:tables": "pnpm --filter @chipboard/database db:tables"
+    "db:tables": "pnpm --filter @chipboard/database db:tables",
+    "migration:audit": "node apps/chipboard/scripts/audit-classic-mysql.js",
+    "migration:import-foundation": "node apps/chipboard/scripts/import-foundation-to-postgres.js",
+    "migration:import-sales": "node apps/chipboard/scripts/import-sales-to-postgres.js",
+    "migration:dedupe-sales": "node apps/chipboard/scripts/dedupe-postgres-sales.js",
+    "migration:verify": "node apps/chipboard/scripts/verify-postgres-migration.js"
   },
   "devDependencies": {
     "prettier": "^3.7.4",

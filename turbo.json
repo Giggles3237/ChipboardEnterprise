@@ -1,6 +1,15 @@
 {
   "$schema": "https://turborepo.dev/schema.json",
   "ui": "tui",
+  "globalEnv": [
+    "APP_SESSION_SECRET",
+    "BOPCHIPBOARD_API_KEY",
+    "DATABASE_URL",
+    "GET_READY_API_URL",
+    "GET_READY_INTEGRATION_KEY",
+    "NODE_ENV",
+    "VERCEL_GIT_COMMIT_SHA"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],

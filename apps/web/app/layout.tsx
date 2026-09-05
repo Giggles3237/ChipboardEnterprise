@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -14,7 +14,7 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Chipboard Enterprise",
   description:
-    "Multi-store dealership operations for sales, goals, contests, and live leaderboards.",
+    "Multi-store dealership operations for sales, goals, and live leaderboards.",
 };
 
 export default function RootLayout({

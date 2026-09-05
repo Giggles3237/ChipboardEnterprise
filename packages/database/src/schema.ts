@@ -51,6 +51,8 @@ export const stores = pgTable(
     code: varchar("code", { length: 40 }).notNull(),
     timezone: varchar("timezone", { length: 80 }).default("America/New_York").notNull(),
     status: storeStatus("status").default("active").notNull(),
+    getReadyToEmails: text("get_ready_to_emails"),
+    getReadyCcEmails: text("get_ready_cc_emails"),
     ...timestamps,
   },
   (table) => ({
