@@ -124,7 +124,7 @@ export default function AdminClient() {
       .then((response) => response.json())
       .then((data) => {
         if (data.session) {
-          setSignedInUser(data.session.displayName);
+          setSignedInUser(data.session.displayName && data.session.email ? `${data.session.displayName} (${data.session.email})` : data.session.displayName || data.session.email);
           setSelectedOrganizationId(data.session.organizationId);
           setSelectedUserId(data.session.userId);
         }
@@ -381,3 +381,4 @@ export default function AdminClient() {
     </main>
   );
 }
+

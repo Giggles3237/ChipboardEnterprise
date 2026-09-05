@@ -3,35 +3,38 @@
   display: grid;
   place-items: center;
   padding: 24px;
-  background: #f4f1eb;
-  color: #172026;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .panel {
   width: min(440px, 100%);
-  border: 1px solid #d8d0c4;
-  border-radius: 8px;
-  background: #fffaf1;
-  box-shadow: 0 16px 36px rgba(23, 32, 38, 0.08);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--surface-color);
+  box-shadow: 0 2px 8px var(--shadow-color);
   padding: 24px;
 }
 
 .eyebrow {
   margin: 0 0 6px;
-  color: #66757f;
+  color: var(--muted-text-color);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
 .panel h1 {
   margin: 0;
-  font-size: 38px;
+  color: var(--bmw-blue);
+  font-size: 36px;
   letter-spacing: 0;
 }
 
 .panel p {
-  color: #4b5b64;
+  margin-top: 12px;
+  color: var(--muted-text-color);
   font-weight: 650;
 }
 
@@ -44,34 +47,55 @@
 .form label {
   display: grid;
   gap: 6px;
-  color: #4b5b64;
+  color: var(--muted-text-color);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
 .form input {
-  min-height: 42px;
-  border: 1px solid #c9bfb2;
-  border-radius: 8px;
-  background: #ffffff;
-  color: #172026;
+  min-height: 40px;
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  background: var(--surface-color);
+  color: var(--text-color);
   padding: 0 10px;
   font: inherit;
 }
 
+.form input:focus {
+  border-color: var(--bmw-blue);
+  box-shadow: 0 0 5px rgba(0, 102, 177, 0.35);
+  outline: none;
+}
+
 .form button {
-  min-height: 42px;
-  border: 1px solid #172026;
-  border-radius: 8px;
-  background: #172026;
+  min-height: 40px;
+  border: 1px solid var(--bmw-blue);
+  border-radius: 4px;
+  background: var(--bmw-blue);
   color: #ffffff;
   font: inherit;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.form button:hover {
+  background: var(--bmw-blue-dark);
+  border-color: var(--bmw-blue-dark);
+}
+
+.form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 .panel a {
-  color: #172026;
-  font-weight: 800;
+  color: var(--bmw-blue);
+  font-weight: 700;
+}
+
+.panel a:hover {
+  text-decoration: underline;
 }

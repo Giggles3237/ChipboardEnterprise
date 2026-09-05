@@ -1,0 +1,38 @@
+.authStatus {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.authStatus span,
+.status {
+  color: var(--muted-text-color);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.authStatus button,
+.linkButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  border: 1px solid var(--bmw-blue);
+  border-radius: 4px;
+  background: var(--surface-color);
+  color: var(--bmw-blue);
+  padding: 0 12px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.authStatus button:hover,
+.linkButton:hover {
+  background: var(--bmw-blue);
+  color: #ffffff;
+}

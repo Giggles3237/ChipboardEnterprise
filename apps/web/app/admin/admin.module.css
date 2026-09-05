@@ -1,8 +1,9 @@
 .page {
   min-height: 100svh;
-  padding: 28px;
-  background: #f4f1eb;
-  color: #172026;
+  padding: 24px;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .header,
@@ -24,8 +25,20 @@
   justify-content: space-between;
 }
 
+.header,
+.statusBar,
+.summaryPanel,
+.metricCard,
+.panel {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .header {
-  margin-bottom: 22px;
+  margin-bottom: 20px;
+  padding: 10px 0 12px;
+  border-bottom: 2px solid var(--bmw-blue);
 }
 
 .header h1,
@@ -36,15 +49,16 @@
 }
 
 .header h1 {
-  font-size: 42px;
+  color: var(--text-color);
+  font-size: 36px;
   line-height: 1;
 }
 
 .eyebrow {
   margin: 0 0 6px;
-  color: #66757f;
+  color: var(--muted-text-color);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
@@ -55,8 +69,8 @@
 }
 
 .actions span {
-  color: #4b5b64;
-  font-weight: 750;
+  color: var(--muted-text-color);
+  font-weight: 700;
 }
 
 .actions a,
@@ -66,15 +80,25 @@
 .primaryButton,
 .rowButton,
 .selectedRow {
-  min-height: 38px;
-  border: 1px solid #c9bfb2;
-  border-radius: 8px;
-  background: #fffaf1;
-  color: #172026;
+  min-height: 36px;
+  border: 1px solid var(--bmw-blue);
+  border-radius: 4px;
+  background: var(--surface-color);
+  color: var(--bmw-blue);
   padding: 0 12px;
   font: inherit;
-  font-weight: 750;
+  font-weight: 700;
   cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.actions a:hover,
+.actions button:hover,
+.statusBar button:hover,
+.panelHeader button:hover,
+.rowButton:hover {
+  background: var(--bmw-blue);
+  color: #ffffff;
 }
 
 .actions button,
@@ -93,16 +117,19 @@ button:disabled {
   display: grid;
   grid-template-columns: minmax(320px, 1.5fr) repeat(3, minmax(150px, 0.5fr));
   margin-bottom: 16px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .summaryPanel,
 .metricCard,
 .statusBar,
 .panel {
-  border: 1px solid #d8d0c4;
-  border-radius: 8px;
-  background: #fffaf1;
-  box-shadow: 0 16px 36px rgba(23, 32, 38, 0.08);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--surface-color);
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .summaryPanel,
@@ -113,7 +140,8 @@ button:disabled {
 }
 
 .summaryPanel h2 {
-  font-size: 28px;
+  color: var(--text-color);
+  font-size: 26px;
   line-height: 1.1;
 }
 
@@ -125,20 +153,20 @@ button:disabled {
 
 .summaryPanel dl div {
   padding-top: 10px;
-  border-top: 1px solid #e4dace;
+  border-top: 1px solid var(--border-color);
 }
 
 .summaryPanel dt,
 .metricCard span,
 .metricCard p {
-  color: #4b5b64;
+  color: var(--muted-text-color);
   font-weight: 700;
 }
 
 .summaryPanel dd {
   margin: 0;
   text-align: right;
-  font-weight: 850;
+  font-weight: 800;
 }
 
 .metricCard span,
@@ -148,8 +176,9 @@ button:disabled {
 
 .metricCard strong {
   display: block;
-  margin: 18px 0 8px;
-  font-size: 36px;
+  margin: 16px 0 8px;
+  color: var(--bmw-blue);
+  font-size: 34px;
   line-height: 1;
 }
 
@@ -158,10 +187,10 @@ button:disabled {
 }
 
 .statusBar {
-  min-height: 58px;
+  min-height: 56px;
   margin-bottom: 16px;
   padding: 10px 16px;
-  color: #4b5b64;
+  color: var(--muted-text-color);
   font-weight: 700;
 }
 
@@ -175,13 +204,22 @@ button:disabled {
 .form input,
 .form select,
 .form textarea {
-  min-height: 38px;
-  border: 1px solid #c9bfb2;
-  border-radius: 8px;
-  background: #ffffff;
-  color: #172026;
+  min-height: 36px;
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  background: var(--surface-color);
+  color: var(--text-color);
   padding: 0 10px;
   font: inherit;
+}
+
+.statusBar input:focus,
+.form input:focus,
+.form select:focus,
+.form textarea:focus {
+  border-color: var(--bmw-blue);
+  box-shadow: 0 0 5px rgba(0, 102, 177, 0.35);
+  outline: none;
 }
 
 .statusBar input {
@@ -194,6 +232,8 @@ button:disabled {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .panelHeader {
@@ -209,15 +249,20 @@ button:disabled {
 .form label {
   display: grid;
   gap: 6px;
-  color: #4b5b64;
+  color: var(--muted-text-color);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
 .primaryButton {
-  background: #172026;
+  background: var(--bmw-blue);
   color: #ffffff;
+}
+
+.primaryButton:hover {
+  background: var(--bmw-blue-dark);
+  border-color: var(--bmw-blue-dark);
 }
 
 .list {
@@ -234,7 +279,7 @@ button:disabled {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 4px 10px;
   width: 100%;
-  min-height: 64px;
+  min-height: 62px;
   padding: 10px 12px;
   text-align: left;
 }
@@ -250,7 +295,7 @@ button:disabled {
 
 .rowButton span,
 .selectedRow span {
-  color: #66757f;
+  color: var(--muted-text-color);
   font-size: 13px;
   font-weight: 650;
 }
@@ -260,9 +305,9 @@ button:disabled {
   grid-row: 1 / span 2;
   grid-column: 2;
   align-self: center;
-  border-radius: 999px;
-  background: #e5edf0;
-  color: #334047;
+  border-radius: 4px;
+  background: var(--light-gray);
+  color: var(--text-color);
   font-size: 12px;
   font-style: normal;
   font-weight: 800;
@@ -270,18 +315,24 @@ button:disabled {
 }
 
 .selectedRow {
-  border-color: #172026;
-  background: #172026;
+  border-color: var(--bmw-blue);
+  background: var(--bmw-blue);
   color: #ffffff;
 }
 
 .selectedRow span {
-  color: #dce6e7;
+  color: #eaf2fb;
 }
 
 .selectedRow em {
-  background: #d8ff69;
-  color: #172026;
+  background: #ffffff;
+  color: var(--bmw-blue);
+}
+
+.form textarea {
+  min-height: 64px;
+  padding: 8px 10px;
+  resize: vertical;
 }
 
 @media (max-width: 1180px) {
@@ -326,11 +377,4 @@ button:disabled {
     width: 100%;
     min-width: 0;
   }
-}
-
-
-.form textarea {
-  min-height: 64px;
-  padding: 8px 10px;
-  resize: vertical;
 }

@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import AuthStatus from "./components/AuthStatus";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -67,7 +68,10 @@ export default function Home() {
             <p className={styles.eyebrow}>Operations command center</p>
             <h2>BMW/MINI of Pittsburgh workspace</h2>
           </div>
-          <div className={styles.statusPill}>Migration ready</div>
+          <div className={styles.topbarActions}>
+            <AuthStatus />
+            <div className={styles.statusPill}>Migration ready</div>
+          </div>
         </header>
 
         <section className={styles.metricGrid} aria-label="Enterprise summary">
@@ -149,3 +153,5 @@ export default function Home() {
     </main>
   );
 }
+
+

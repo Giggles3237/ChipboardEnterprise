@@ -1,8 +1,8 @@
 .page {
   min-height: 100svh;
   padding: 24px;
-  background: #f6f8fb;
-  color: #172026;
+  background: var(--background-color);
+  color: var(--text-color);
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -47,7 +47,7 @@
 
 .eyebrow {
   margin: 0 0 6px;
-  color: #62717d;
+  color: var(--muted-text-color);
   font-size: 12px;
   font-weight: 600;
   text-transform: none;
@@ -60,10 +60,10 @@
 .actions button,
 .headerActions button {
   min-height: 36px;
-  border: 1px solid #d3dbe3;
-  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
   background: #ffffff;
-  color: #172026;
+  color: var(--text-color);
   padding: 0 12px;
   font: inherit;
   font-weight: 600;
@@ -76,19 +76,19 @@
 .panelHeading button:hover,
 .actions button:hover,
 .headerActions button:hover {
-  border-color: #0653b6;
-  box-shadow: 0 4px 14px rgba(6, 83, 182, 0.1);
+  border-color: var(--bmw-blue);
+  box-shadow: 0 4px 14px rgba(0, 102, 177, 0.1);
 }
 
 .primaryButton {
-  border-color: #0653b6;
-  background: #0653b6;
+  border-color: var(--bmw-blue);
+  background: var(--bmw-blue);
   color: #ffffff;
 }
 
 .primaryButton:hover {
-  box-shadow: 0 6px 18px rgba(6, 83, 182, 0.22);
-  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 102, 177, 0.22);
+  transform: none;
 }
 
 .contextBar,
@@ -96,10 +96,10 @@
 .formPanel,
 .tablePanel,
 .chipBoard {
-  border: 1px solid #d9e1e8;
-  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
   background: #ffffff;
-  box-shadow: 0 12px 30px rgba(23, 32, 38, 0.06);
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .contextBar {
@@ -112,7 +112,7 @@
 .saleForm label {
   display: grid;
   gap: 6px;
-  color: #52616d;
+  color: var(--muted-text-color);
   font-size: 13px;
   font-weight: 600;
   text-transform: none;
@@ -123,10 +123,10 @@
 .saleForm select,
 .salesTable input {
   min-height: 36px;
-  border: 1px solid #d3dbe3;
-  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
   background: #ffffff;
-  color: #172026;
+  color: var(--text-color);
   padding: 0 10px;
   font: inherit;
   text-transform: none;
@@ -136,8 +136,8 @@
 .saleForm input:focus,
 .saleForm select:focus,
 .salesTable input:focus {
-  border-color: #0653b6;
-  box-shadow: 0 0 0 3px rgba(6, 83, 182, 0.12);
+  border-color: var(--bmw-blue);
+  box-shadow: 0 0 0 3px rgba(0, 102, 177, 0.12);
   outline: none;
 }
 
@@ -150,7 +150,7 @@
   min-height: 44px;
   padding: 0 16px;
   margin-bottom: 12px;
-  color: #52616d;
+  color: var(--muted-text-color);
   font-weight: 600;
 }
 
@@ -195,19 +195,19 @@
   gap: 28px;
   margin: 0 0 20px;
   padding: 0 0 12px;
-  border-bottom: 1px solid #e1e7ed;
-  color: #172026;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-color);
   font-size: 15px;
 }
 
 .boardTotals strong {
-  color: #0653b6;
+  color: var(--bmw-blue);
   font-size: 17px;
 }
 
 .emptyBoard {
   margin: 0;
-  color: #62717d;
+  color: var(--muted-text-color);
   font-weight: 600;
 }
 
@@ -226,24 +226,24 @@
   gap: 14px;
   margin: 0 0 10px;
   padding: 0 0 9px;
-  border-bottom: 1px solid #e1e7ed;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .advisorHeading h3 {
   margin: 0;
   min-width: 150px;
-  color: #050b12;
+  color: var(--text-color);
   font-size: 17px;
   line-height: 1.2;
 }
 
 .advisorHeading span {
-  color: #172026;
+  color: var(--text-color);
   font-weight: 600;
 }
 
 .advisorHeading small {
-  color: #7a8791;
+  color: var(--muted-text-color);
   font-weight: 600;
 }
 
@@ -262,8 +262,8 @@
   width: 92px;
   height: 28px;
   border-radius: 0;
-  border: 1px solid #0653b6;
-  box-shadow: 0 1px 2px rgba(23, 32, 38, 0.16);
+  border: 1px solid var(--bmw-blue);
+  box-shadow: 0 1px 2px var(--shadow-color);
   padding: 2px 8px;
   font: inherit;
   font-size: 12px;
@@ -274,7 +274,7 @@
 }
 
 .saleChip:hover {
-  box-shadow: 0 5px 12px rgba(23, 32, 38, 0.22);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.18);
   transform: translateY(-3px) scale(1.04);
   z-index: 2;
 }
@@ -295,17 +295,17 @@
 
 .bmwChip {
   background: #ffffff;
-  color: #0653b6;
+  color: var(--bmw-blue);
 }
 
 .miniChip {
-  background: #70b62c;
-  border-color: #70b62c;
+  background: var(--mini-green);
+  border-color: var(--mini-green);
   color: #ffffff;
 }
 
 .usedChip {
-  background: #0653b6;
+  background: var(--bmw-blue);
   color: #ffffff;
 }
 
@@ -328,17 +328,17 @@
 
 .salesTable th,
 .salesTable td {
-  border-bottom: 1px solid #e1e7ed;
+  border-bottom: 1px solid var(--border-color);
   padding: 10px 12px;
   text-align: left;
   vertical-align: middle;
 }
 
 .salesTable th {
-  background: #f8fafc;
-  color: #52616d;
+  background: var(--surface-alt-color);
+  color: var(--muted-text-color);
   font-size: 12px;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .salesTable th input {
@@ -350,12 +350,12 @@
 }
 
 .salesTable tbody tr:hover {
-  background: #f4f8fd;
+  background: var(--hover-background);
 }
 
 .wholesaleRow {
-  background: #f8fafc;
-  color: #62717d;
+  background: var(--surface-alt-color);
+  color: var(--muted-text-color);
 }
 
 .delivered,
@@ -385,7 +385,7 @@
 }
 
 .headerActions span {
-  color: #52616d;
+  color: var(--muted-text-color);
   font-weight: 600;
 }
 
@@ -430,17 +430,17 @@
   display: grid;
   place-items: center;
   padding: 24px;
-  background: rgba(8, 15, 25, 0.48);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .saleModal {
   width: min(760px, 100%);
   max-height: min(860px, calc(100svh - 48px));
   overflow: auto;
-  border: 1px solid #d9e1e8;
-  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
   background: #ffffff;
-  box-shadow: 0 24px 70px rgba(8, 15, 25, 0.28);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   padding: 20px;
 }
 
@@ -451,12 +451,12 @@
   gap: 16px;
   margin-bottom: 16px;
   padding-bottom: 12px;
-  border-bottom: 1px solid #e1e7ed;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .modalHeader h2 {
   margin: 0;
-  color: #0653b6;
+  color: var(--bmw-blue);
   font-size: 28px;
   line-height: 1;
 }
@@ -464,10 +464,10 @@
 .modalHeader button,
 .modalActions button {
   min-height: 36px;
-  border: 1px solid #d3dbe3;
-  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
   background: #ffffff;
-  color: #172026;
+  color: var(--text-color);
   padding: 0 12px;
   font: inherit;
   font-weight: 600;
@@ -486,10 +486,10 @@
   min-height: 38px;
   display: flex;
   align-items: center;
-  border: 1px solid #e1e7ed;
-  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
   padding: 8px 10px;
-  background: #f8fafc;
+  background: var(--surface-alt-color);
 }
 
 .modalActions {
@@ -502,7 +502,7 @@
 .getReadyPanel {
   margin-top: 18px;
   padding-top: 16px;
-  border-top: 1px solid #e1e7ed;
+  border-top: 1px solid var(--border-color);
 }
 
 .getReadyGrid {
@@ -515,7 +515,7 @@
 .comments {
   display: grid;
   gap: 6px;
-  color: #52616d;
+  color: var(--muted-text-color);
   font-size: 13px;
   font-weight: 600;
 }
@@ -523,10 +523,10 @@
 .getReadyGrid input,
 .comments textarea {
   min-height: 36px;
-  border: 1px solid #d3dbe3;
-  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
   background: #ffffff;
-  color: #172026;
+  color: var(--text-color);
   padding: 8px 10px;
   font: inherit;
 }
@@ -536,14 +536,14 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px 12px;
   margin: 14px 0;
-  border: 1px solid #e1e7ed;
-  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
   padding: 12px;
 }
 
 .instructions legend {
   padding: 0 6px;
-  color: #52616d;
+  color: var(--muted-text-color);
   font-size: 13px;
   font-weight: 700;
 }
@@ -552,7 +552,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #172026;
+  color: var(--text-color);
   font-size: 13px;
 }
 
@@ -570,11 +570,12 @@
 }
 .configNote {
   margin: 12px 0 0;
-  border: 1px solid #d9e1e8;
-  border-radius: 6px;
-  background: #f8fafc;
-  color: #52616d;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--surface-alt-color);
+  color: var(--muted-text-color);
   padding: 9px 10px;
   font-size: 13px;
   font-weight: 600;
 }
+
